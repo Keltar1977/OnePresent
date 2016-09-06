@@ -1,0 +1,835 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C66D34FF55D34490B6D2A3C /* Pods_OnePresent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D8BB3D460B6CFB1B9EF5A41 /* Pods_OnePresent.framework */; };
+		9C017DEB1D76E44800947469 /* DrawingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C017DEA1D76E44800947469 /* DrawingPage.swift */; };
+		9C03F17F1CEA2F8300CB6C2E /* Chime yellow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C03F17B1CEA2F8300CB6C2E /* Chime yellow.mp3 */; };
+		9C03F1801CEA2F8300CB6C2E /* Chime green.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C03F17C1CEA2F8300CB6C2E /* Chime green.mp3 */; };
+		9C03F1811CEA2F8300CB6C2E /* Chime purple.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C03F17D1CEA2F8300CB6C2E /* Chime purple.mp3 */; };
+		9C03F1821CEA2F8300CB6C2E /* Chime blue.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C03F17E1CEA2F8300CB6C2E /* Chime blue.mp3 */; };
+		9C2C38701D5E105D0018BE61 /* OnePresentPagesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C386E1D5E105D0018BE61 /* OnePresentPagesScene.swift */; };
+		9C2C38741D5E12870018BE61 /* TitlePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C38731D5E12870018BE61 /* TitlePage.swift */; };
+		9C2C38771D5E13880018BE61 /* IndexPageScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C2C38751D5E13880018BE61 /* IndexPageScene.sks */; };
+		9C2C38781D5E13880018BE61 /* IndexPageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2C38761D5E13880018BE61 /* IndexPageScene.swift */; };
+		9C3A64621CE0C79600355C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64611CE0C79600355C92 /* AppDelegate.swift */; };
+		9C3A64681CE0C79600355C92 /* OnePresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64671CE0C79600355C92 /* OnePresentViewController.swift */; };
+		9C3A646B1CE0C79600355C92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C3A64691CE0C79600355C92 /* Main.storyboard */; };
+		9C3A646D1CE0C79600355C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C3A646C1CE0C79600355C92 /* Assets.xcassets */; };
+		9C3A64701CE0C79600355C92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C3A646E1CE0C79600355C92 /* LaunchScreen.storyboard */; };
+		9C3A648D1CE0F1B700355C92 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64811CE0F1B700355C92 /* CGFloat+Extensions.swift */; };
+		9C3A648E1CE0F1B700355C92 /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64821CE0F1B700355C92 /* CGPoint+Extensions.swift */; };
+		9C3A648F1CE0F1B700355C92 /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64831CE0F1B700355C92 /* CGVector+Extensions.swift */; };
+		9C3A64901CE0F1B700355C92 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64841CE0F1B700355C92 /* Int+Extensions.swift */; };
+		9C3A64911CE0F1B700355C92 /* SKAction+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64851CE0F1B700355C92 /* SKAction+Extensions.swift */; };
+		9C3A64921CE0F1B700355C92 /* SKAction+SpecialEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64861CE0F1B700355C92 /* SKAction+SpecialEffects.swift */; };
+		9C3A64931CE0F1B700355C92 /* SKColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64871CE0F1B700355C92 /* SKColor+Extensions.swift */; };
+		9C3A64941CE0F1B700355C92 /* SKNode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64881CE0F1B700355C92 /* SKNode+Extensions.swift */; };
+		9C3A64951CE0F1B700355C92 /* SKTAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64891CE0F1B700355C92 /* SKTAudio.swift */; };
+		9C3A64961CE0F1B700355C92 /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A648A1CE0F1B700355C92 /* SKTEffects.swift */; };
+		9C3A64971CE0F1B700355C92 /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A648B1CE0F1B700355C92 /* SKTTimingFunctions.swift */; };
+		9C3A64981CE0F1B700355C92 /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A648C1CE0F1B700355C92 /* Vector3.swift */; };
+		9C3A64C41CE4D60900355C92 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64C21CE4D60900355C92 /* Extensions.swift */; };
+		9C3A64C91CE4D69400355C92 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64C61CE4D69400355C92 /* Constants.swift */; };
+		9C3A64CA1CE4D69400355C92 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64C71CE4D69400355C92 /* Enums.swift */; };
+		9C3A64CB1CE4D69400355C92 /* PuzzleBeziers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3A64C81CE4D69400355C92 /* PuzzleBeziers.swift */; };
+		9C4317261D7DA2D2006297E0 /* HiddenPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4317251D7DA2D2006297E0 /* HiddenPictures.swift */; };
+		9C4317281D7DBA00006297E0 /* GetPresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4317271D7DBA00006297E0 /* GetPresent.swift */; };
+		9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C483B371D7819BF00A53426 /* DrawingPage.sks */; };
+		9C561D611D6F445A0080E909 /* DayFiveComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */; };
+		9C561D621D6F445A0080E909 /* DayFiveComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D2B1D6F445A0080E909 /* DayFiveComeBack.swift */; };
+		9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */; };
+		9C561D651D6F445A0080E909 /* DayFiveHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */; };
+		9C561D671D6F445A0080E909 /* DayFiveScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D301D6F445A0080E909 /* DayFiveScene.swift */; };
+		9C561D681D6F445A0080E909 /* DayFourComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D321D6F445A0080E909 /* DayFourComeBack.sks */; };
+		9C561D691D6F445A0080E909 /* DayFourComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D331D6F445A0080E909 /* DayFourComeBack.swift */; };
+		9C561D6A1D6F445A0080E909 /* DayFourGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */; };
+		9C561D6C1D6F445A0080E909 /* DayFourHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */; };
+		9C561D6E1D6F445A0080E909 /* DayFourScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D381D6F445A0080E909 /* DayFourScene.swift */; };
+		9C561D6F1D6F445A0080E909 /* DayOneComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3A1D6F445A0080E909 /* DayOneComeBack.sks */; };
+		9C561D701D6F445A0080E909 /* DayOneComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D3B1D6F445A0080E909 /* DayOneComeBack.swift */; };
+		9C561D711D6F445A0080E909 /* DayOneGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3C1D6F445A0080E909 /* DayOneGetPresent.sks */; };
+		9C561D731D6F445A0080E909 /* DayOneHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3E1D6F445A0080E909 /* DayOneHiddenPictures.sks */; };
+		9C561D751D6F445A0080E909 /* DayOneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D401D6F445A0080E909 /* DayOneScene.swift */; };
+		9C561D761D6F445A0080E909 /* DaySevenComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D421D6F445A0080E909 /* DaySevenComeBack.sks */; };
+		9C561D771D6F445A0080E909 /* DaySevenComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D431D6F445A0080E909 /* DaySevenComeBack.swift */; };
+		9C561D781D6F445A0080E909 /* DaySevenGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D441D6F445A0080E909 /* DaySevenGetPresent.sks */; };
+		9C561D7A1D6F445A0080E909 /* DaySevenHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D461D6F445A0080E909 /* DaySevenHiddenPictures.sks */; };
+		9C561D7C1D6F445A0080E909 /* DaySevenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D481D6F445A0080E909 /* DaySevenScene.swift */; };
+		9C561D7D1D6F445A0080E909 /* DaySixComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D4A1D6F445A0080E909 /* DaySixComeBack.sks */; };
+		9C561D7E1D6F445A0080E909 /* DaySixComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D4B1D6F445A0080E909 /* DaySixComeBack.swift */; };
+		9C561D7F1D6F445A0080E909 /* DaySixGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D4C1D6F445A0080E909 /* DaySixGetPresent.sks */; };
+		9C561D811D6F445A0080E909 /* DaySixHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D4E1D6F445A0080E909 /* DaySixHiddenPictures.sks */; };
+		9C561D831D6F445A0080E909 /* DaySixScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D501D6F445A0080E909 /* DaySixScene.swift */; };
+		9C561D841D6F445A0080E909 /* DayThreeComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D521D6F445A0080E909 /* DayThreeComeBack.sks */; };
+		9C561D851D6F445A0080E909 /* DayThreeComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D531D6F445A0080E909 /* DayThreeComeBack.swift */; };
+		9C561D861D6F445A0080E909 /* DayThreeGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D541D6F445A0080E909 /* DayThreeGetPresent.sks */; };
+		9C561D881D6F445A0080E909 /* DayThreeHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D561D6F445A0080E909 /* DayThreeHiddenPictures.sks */; };
+		9C561D8A1D6F445A0080E909 /* DayThreeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D581D6F445A0080E909 /* DayThreeScene.swift */; };
+		9C561D8B1D6F445A0080E909 /* DayTwoComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D5A1D6F445A0080E909 /* DayTwoComeBack.sks */; };
+		9C561D8C1D6F445A0080E909 /* DayTwoComeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D5B1D6F445A0080E909 /* DayTwoComeBack.swift */; };
+		9C561D8D1D6F445A0080E909 /* DayTwoGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D5C1D6F445A0080E909 /* DayTwoGetPresent.sks */; };
+		9C561D8F1D6F445A0080E909 /* DayTwoHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D5E1D6F445A0080E909 /* DayTwoHiddenPictures.sks */; };
+		9C561D911D6F445A0080E909 /* DayTwoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D601D6F445A0080E909 /* DayTwoScene.swift */; };
+		9C561DA01D6F448C0080E909 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D931D6F448C0080E909 /* Card.swift */; };
+		9C561DA11D6F448C0080E909 /* CardGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D941D6F448C0080E909 /* CardGame.swift */; };
+		9C561DA21D6F448C0080E909 /* DragAndDropGame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D951D6F448C0080E909 /* DragAndDropGame.sks */; };
+		9C561DA31D6F448C0080E909 /* DragAndDropGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D961D6F448C0080E909 /* DragAndDropGame.swift */; };
+		9C561DA41D6F448C0080E909 /* JigsawPuzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D971D6F448C0080E909 /* JigsawPuzzle.swift */; };
+		9C561DA51D6F448C0080E909 /* MazeGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D981D6F448C0080E909 /* MazeGameScene.sks */; };
+		9C561DA61D6F448C0080E909 /* MazeGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D991D6F448C0080E909 /* MazeGameScene.swift */; };
+		9C561DA71D6F448C0080E909 /* PlayASongGame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D9A1D6F448C0080E909 /* PlayASongGame.sks */; };
+		9C561DA81D6F448C0080E909 /* PlayASongGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D9B1D6F448C0080E909 /* PlayASongGame.swift */; };
+		9C561DA91D6F448C0080E909 /* PolkaDotGame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D9C1D6F448C0080E909 /* PolkaDotGame.sks */; };
+		9C561DAA1D6F448C0080E909 /* PolkaDotGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D9D1D6F448C0080E909 /* PolkaDotGame.swift */; };
+		9C561DAB1D6F448C0080E909 /* SimonGame.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D9E1D6F448C0080E909 /* SimonGame.sks */; };
+		9C561DAC1D6F448C0080E909 /* SimonGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C561D9F1D6F448C0080E909 /* SimonGame.swift */; };
+		9CD5864D1D377DB900190278 /* snowfall.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9CD5864B1D377DB900190278 /* snowfall.sks */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5D823474E6D05BCA9F309B37 /* Pods-OnePresent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePresent.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePresent/Pods-OnePresent.release.xcconfig"; sourceTree = "<group>"; };
+		7D8BB3D460B6CFB1B9EF5A41 /* Pods_OnePresent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePresent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C017DEA1D76E44800947469 /* DrawingPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DrawingPage.swift; path = Days/DrawingPage.swift; sourceTree = "<group>"; };
+		9C03F17B1CEA2F8300CB6C2E /* Chime yellow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chime yellow.mp3"; sourceTree = "<group>"; };
+		9C03F17C1CEA2F8300CB6C2E /* Chime green.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chime green.mp3"; sourceTree = "<group>"; };
+		9C03F17D1CEA2F8300CB6C2E /* Chime purple.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chime purple.mp3"; sourceTree = "<group>"; };
+		9C03F17E1CEA2F8300CB6C2E /* Chime blue.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Chime blue.mp3"; sourceTree = "<group>"; };
+		9C2C386E1D5E105D0018BE61 /* OnePresentPagesScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnePresentPagesScene.swift; path = Days/OnePresentPagesScene.swift; sourceTree = "<group>"; };
+		9C2C38731D5E12870018BE61 /* TitlePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TitlePage.swift; path = Days/TitlePage.swift; sourceTree = "<group>"; };
+		9C2C38751D5E13880018BE61 /* IndexPageScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = IndexPageScene.sks; path = Days/IndexPageScene.sks; sourceTree = "<group>"; };
+		9C2C38761D5E13880018BE61 /* IndexPageScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IndexPageScene.swift; path = Days/IndexPageScene.swift; sourceTree = "<group>"; };
+		9C3A645E1CE0C79600355C92 /* OnePresent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePresent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C3A64611CE0C79600355C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9C3A64671CE0C79600355C92 /* OnePresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePresentViewController.swift; sourceTree = "<group>"; };
+		9C3A646A1CE0C79600355C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9C3A646C1CE0C79600355C92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C3A646F1CE0C79600355C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9C3A64711CE0C79600355C92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C3A64811CE0F1B700355C92 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64821CE0F1B700355C92 /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64831CE0F1B700355C92 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64841CE0F1B700355C92 /* Int+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64851CE0F1B700355C92 /* SKAction+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64861CE0F1B700355C92 /* SKAction+SpecialEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKAction+SpecialEffects.swift"; sourceTree = "<group>"; };
+		9C3A64871CE0F1B700355C92 /* SKColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKColor+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64881CE0F1B700355C92 /* SKNode+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKNode+Extensions.swift"; sourceTree = "<group>"; };
+		9C3A64891CE0F1B700355C92 /* SKTAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTAudio.swift; sourceTree = "<group>"; };
+		9C3A648A1CE0F1B700355C92 /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
+		9C3A648B1CE0F1B700355C92 /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
+		9C3A648C1CE0F1B700355C92 /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		9C3A64C21CE4D60900355C92 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9C3A64C61CE4D69400355C92 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9C3A64C71CE4D69400355C92 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		9C3A64C81CE4D69400355C92 /* PuzzleBeziers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleBeziers.swift; sourceTree = "<group>"; };
+		9C4317251D7DA2D2006297E0 /* HiddenPictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HiddenPictures.swift; path = Days/HiddenPictures.swift; sourceTree = "<group>"; };
+		9C4317271D7DBA00006297E0 /* GetPresent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPresent.swift; path = Days/GetPresent.swift; sourceTree = "<group>"; };
+		9C483B371D7819BF00A53426 /* DrawingPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DrawingPage.sks; path = Days/DrawingPage.sks; sourceTree = "<group>"; };
+		9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveComeBack.sks; sourceTree = "<group>"; };
+		9C561D2B1D6F445A0080E909 /* DayFiveComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayFiveComeBack.swift; sourceTree = "<group>"; };
+		9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveGetPresent.sks; sourceTree = "<group>"; };
+		9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D301D6F445A0080E909 /* DayFiveScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayFiveScene.swift; sourceTree = "<group>"; };
+		9C561D321D6F445A0080E909 /* DayFourComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourComeBack.sks; sourceTree = "<group>"; };
+		9C561D331D6F445A0080E909 /* DayFourComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayFourComeBack.swift; sourceTree = "<group>"; };
+		9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourGetPresent.sks; sourceTree = "<group>"; };
+		9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D381D6F445A0080E909 /* DayFourScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayFourScene.swift; sourceTree = "<group>"; };
+		9C561D3A1D6F445A0080E909 /* DayOneComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneComeBack.sks; sourceTree = "<group>"; };
+		9C561D3B1D6F445A0080E909 /* DayOneComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayOneComeBack.swift; sourceTree = "<group>"; };
+		9C561D3C1D6F445A0080E909 /* DayOneGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneGetPresent.sks; sourceTree = "<group>"; };
+		9C561D3E1D6F445A0080E909 /* DayOneHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D401D6F445A0080E909 /* DayOneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayOneScene.swift; sourceTree = "<group>"; };
+		9C561D421D6F445A0080E909 /* DaySevenComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySevenComeBack.sks; sourceTree = "<group>"; };
+		9C561D431D6F445A0080E909 /* DaySevenComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySevenComeBack.swift; sourceTree = "<group>"; };
+		9C561D441D6F445A0080E909 /* DaySevenGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySevenGetPresent.sks; sourceTree = "<group>"; };
+		9C561D461D6F445A0080E909 /* DaySevenHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySevenHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D481D6F445A0080E909 /* DaySevenScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySevenScene.swift; sourceTree = "<group>"; };
+		9C561D4A1D6F445A0080E909 /* DaySixComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySixComeBack.sks; sourceTree = "<group>"; };
+		9C561D4B1D6F445A0080E909 /* DaySixComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySixComeBack.swift; sourceTree = "<group>"; };
+		9C561D4C1D6F445A0080E909 /* DaySixGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySixGetPresent.sks; sourceTree = "<group>"; };
+		9C561D4E1D6F445A0080E909 /* DaySixHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DaySixHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D501D6F445A0080E909 /* DaySixScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaySixScene.swift; sourceTree = "<group>"; };
+		9C561D521D6F445A0080E909 /* DayThreeComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayThreeComeBack.sks; sourceTree = "<group>"; };
+		9C561D531D6F445A0080E909 /* DayThreeComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayThreeComeBack.swift; sourceTree = "<group>"; };
+		9C561D541D6F445A0080E909 /* DayThreeGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayThreeGetPresent.sks; sourceTree = "<group>"; };
+		9C561D561D6F445A0080E909 /* DayThreeHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayThreeHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D581D6F445A0080E909 /* DayThreeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayThreeScene.swift; sourceTree = "<group>"; };
+		9C561D5A1D6F445A0080E909 /* DayTwoComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayTwoComeBack.sks; sourceTree = "<group>"; };
+		9C561D5B1D6F445A0080E909 /* DayTwoComeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTwoComeBack.swift; sourceTree = "<group>"; };
+		9C561D5C1D6F445A0080E909 /* DayTwoGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayTwoGetPresent.sks; sourceTree = "<group>"; };
+		9C561D5E1D6F445A0080E909 /* DayTwoHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayTwoHiddenPictures.sks; sourceTree = "<group>"; };
+		9C561D601D6F445A0080E909 /* DayTwoScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayTwoScene.swift; sourceTree = "<group>"; };
+		9C561D931D6F448C0080E909 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		9C561D941D6F448C0080E909 /* CardGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardGame.swift; sourceTree = "<group>"; };
+		9C561D951D6F448C0080E909 /* DragAndDropGame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DragAndDropGame.sks; sourceTree = "<group>"; };
+		9C561D961D6F448C0080E909 /* DragAndDropGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragAndDropGame.swift; sourceTree = "<group>"; };
+		9C561D971D6F448C0080E909 /* JigsawPuzzle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JigsawPuzzle.swift; sourceTree = "<group>"; };
+		9C561D981D6F448C0080E909 /* MazeGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MazeGameScene.sks; sourceTree = "<group>"; };
+		9C561D991D6F448C0080E909 /* MazeGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MazeGameScene.swift; sourceTree = "<group>"; };
+		9C561D9A1D6F448C0080E909 /* PlayASongGame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayASongGame.sks; sourceTree = "<group>"; };
+		9C561D9B1D6F448C0080E909 /* PlayASongGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayASongGame.swift; sourceTree = "<group>"; };
+		9C561D9C1D6F448C0080E909 /* PolkaDotGame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PolkaDotGame.sks; sourceTree = "<group>"; };
+		9C561D9D1D6F448C0080E909 /* PolkaDotGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolkaDotGame.swift; sourceTree = "<group>"; };
+		9C561D9E1D6F448C0080E909 /* SimonGame.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SimonGame.sks; sourceTree = "<group>"; };
+		9C561D9F1D6F448C0080E909 /* SimonGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimonGame.swift; sourceTree = "<group>"; };
+		9CD5864B1D377DB900190278 /* snowfall.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = snowfall.sks; sourceTree = "<group>"; };
+		EDD9637810A601580F37C87D /* Pods-OnePresent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePresent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePresent/Pods-OnePresent.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C3A645B1CE0C79600355C92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C66D34FF55D34490B6D2A3C /* Pods_OnePresent.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6FAD085E0ADF72CA229A016F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDD9637810A601580F37C87D /* Pods-OnePresent.debug.xcconfig */,
+				5D823474E6D05BCA9F309B37 /* Pods-OnePresent.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		9C03F17A1CEA2F8300CB6C2E /* SimonGame */ = {
+			isa = PBXGroup;
+			children = (
+				9C03F17B1CEA2F8300CB6C2E /* Chime yellow.mp3 */,
+				9C03F17C1CEA2F8300CB6C2E /* Chime green.mp3 */,
+				9C03F17D1CEA2F8300CB6C2E /* Chime purple.mp3 */,
+				9C03F17E1CEA2F8300CB6C2E /* Chime blue.mp3 */,
+			);
+			path = SimonGame;
+			sourceTree = "<group>";
+		};
+		9C2C386C1D5E10260018BE61 /* Days */ = {
+			isa = PBXGroup;
+			children = (
+				9C2C386E1D5E105D0018BE61 /* OnePresentPagesScene.swift */,
+				9C2C38731D5E12870018BE61 /* TitlePage.swift */,
+				9C2C38751D5E13880018BE61 /* IndexPageScene.sks */,
+				9C2C38761D5E13880018BE61 /* IndexPageScene.swift */,
+				9C4317251D7DA2D2006297E0 /* HiddenPictures.swift */,
+				9C4317271D7DBA00006297E0 /* GetPresent.swift */,
+				9C017DEA1D76E44800947469 /* DrawingPage.swift */,
+				9C483B371D7819BF00A53426 /* DrawingPage.sks */,
+				9C561D391D6F445A0080E909 /* Day One */,
+				9C561D591D6F445A0080E909 /* Day Two */,
+				9C561D511D6F445A0080E909 /* Day Three */,
+				9C561D311D6F445A0080E909 /* Day Four */,
+				9C561D291D6F445A0080E909 /* Day Five */,
+				9C561D491D6F445A0080E909 /* Day Six */,
+				9C561D411D6F445A0080E909 /* Day Seven */,
+			);
+			name = Days;
+			sourceTree = "<group>";
+		};
+		9C3A64551CE0C79600355C92 = {
+			isa = PBXGroup;
+			children = (
+				9C3A64601CE0C79600355C92 /* OnePresent */,
+				9C3A645F1CE0C79600355C92 /* Products */,
+				6FAD085E0ADF72CA229A016F /* Pods */,
+				B67B90FE5186CB4199748D99 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9C3A645F1CE0C79600355C92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C3A645E1CE0C79600355C92 /* OnePresent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C3A64601CE0C79600355C92 /* OnePresent */ = {
+			isa = PBXGroup;
+			children = (
+				9C3A64611CE0C79600355C92 /* AppDelegate.swift */,
+				9C2C386C1D5E10260018BE61 /* Days */,
+				9CD5864A1D377DA300190278 /* Additionals */,
+				9C561D921D6F448C0080E909 /* Games */,
+				9C3A64671CE0C79600355C92 /* OnePresentViewController.swift */,
+				9C3A64691CE0C79600355C92 /* Main.storyboard */,
+				9C3A646C1CE0C79600355C92 /* Assets.xcassets */,
+				9C3A646E1CE0C79600355C92 /* LaunchScreen.storyboard */,
+				9C3A64CC1CE4F45100355C92 /* Sounds */,
+				9C3A64C11CE4D60900355C92 /* Extensions */,
+				9C3A64801CE0F1B700355C92 /* SKTUtils */,
+				9C3A64711CE0C79600355C92 /* Info.plist */,
+			);
+			path = OnePresent;
+			sourceTree = "<group>";
+		};
+		9C3A64801CE0F1B700355C92 /* SKTUtils */ = {
+			isa = PBXGroup;
+			children = (
+				9C3A64811CE0F1B700355C92 /* CGFloat+Extensions.swift */,
+				9C3A64821CE0F1B700355C92 /* CGPoint+Extensions.swift */,
+				9C3A64831CE0F1B700355C92 /* CGVector+Extensions.swift */,
+				9C3A64841CE0F1B700355C92 /* Int+Extensions.swift */,
+				9C3A64851CE0F1B700355C92 /* SKAction+Extensions.swift */,
+				9C3A64861CE0F1B700355C92 /* SKAction+SpecialEffects.swift */,
+				9C3A64871CE0F1B700355C92 /* SKColor+Extensions.swift */,
+				9C3A64881CE0F1B700355C92 /* SKNode+Extensions.swift */,
+				9C3A64891CE0F1B700355C92 /* SKTAudio.swift */,
+				9C3A648A1CE0F1B700355C92 /* SKTEffects.swift */,
+				9C3A648B1CE0F1B700355C92 /* SKTTimingFunctions.swift */,
+				9C3A648C1CE0F1B700355C92 /* Vector3.swift */,
+			);
+			path = SKTUtils;
+			sourceTree = "<group>";
+		};
+		9C3A64C11CE4D60900355C92 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9C3A64C21CE4D60900355C92 /* Extensions.swift */,
+				9C3A64C61CE4D69400355C92 /* Constants.swift */,
+				9C3A64C71CE4D69400355C92 /* Enums.swift */,
+				9C3A64C81CE4D69400355C92 /* PuzzleBeziers.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9C3A64CC1CE4F45100355C92 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9C03F17A1CEA2F8300CB6C2E /* SimonGame */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		9C561D291D6F445A0080E909 /* Day Five */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */,
+				9C561D2B1D6F445A0080E909 /* DayFiveComeBack.swift */,
+				9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */,
+				9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */,
+				9C561D301D6F445A0080E909 /* DayFiveScene.swift */,
+			);
+			name = "Day Five";
+			path = "Days/Day Five";
+			sourceTree = "<group>";
+		};
+		9C561D311D6F445A0080E909 /* Day Four */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D321D6F445A0080E909 /* DayFourComeBack.sks */,
+				9C561D331D6F445A0080E909 /* DayFourComeBack.swift */,
+				9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */,
+				9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */,
+				9C561D381D6F445A0080E909 /* DayFourScene.swift */,
+			);
+			name = "Day Four";
+			path = "Days/Day Four";
+			sourceTree = "<group>";
+		};
+		9C561D391D6F445A0080E909 /* Day One */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D3A1D6F445A0080E909 /* DayOneComeBack.sks */,
+				9C561D3B1D6F445A0080E909 /* DayOneComeBack.swift */,
+				9C561D3C1D6F445A0080E909 /* DayOneGetPresent.sks */,
+				9C561D3E1D6F445A0080E909 /* DayOneHiddenPictures.sks */,
+				9C561D401D6F445A0080E909 /* DayOneScene.swift */,
+			);
+			name = "Day One";
+			path = "Days/Day One";
+			sourceTree = "<group>";
+		};
+		9C561D411D6F445A0080E909 /* Day Seven */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D421D6F445A0080E909 /* DaySevenComeBack.sks */,
+				9C561D431D6F445A0080E909 /* DaySevenComeBack.swift */,
+				9C561D441D6F445A0080E909 /* DaySevenGetPresent.sks */,
+				9C561D461D6F445A0080E909 /* DaySevenHiddenPictures.sks */,
+				9C561D481D6F445A0080E909 /* DaySevenScene.swift */,
+			);
+			name = "Day Seven";
+			path = "Days/Day Seven";
+			sourceTree = "<group>";
+		};
+		9C561D491D6F445A0080E909 /* Day Six */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D4A1D6F445A0080E909 /* DaySixComeBack.sks */,
+				9C561D4B1D6F445A0080E909 /* DaySixComeBack.swift */,
+				9C561D4C1D6F445A0080E909 /* DaySixGetPresent.sks */,
+				9C561D4E1D6F445A0080E909 /* DaySixHiddenPictures.sks */,
+				9C561D501D6F445A0080E909 /* DaySixScene.swift */,
+			);
+			name = "Day Six";
+			path = "Days/Day Six";
+			sourceTree = "<group>";
+		};
+		9C561D511D6F445A0080E909 /* Day Three */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D521D6F445A0080E909 /* DayThreeComeBack.sks */,
+				9C561D531D6F445A0080E909 /* DayThreeComeBack.swift */,
+				9C561D541D6F445A0080E909 /* DayThreeGetPresent.sks */,
+				9C561D561D6F445A0080E909 /* DayThreeHiddenPictures.sks */,
+				9C561D581D6F445A0080E909 /* DayThreeScene.swift */,
+			);
+			name = "Day Three";
+			path = "Days/Day Three";
+			sourceTree = "<group>";
+		};
+		9C561D591D6F445A0080E909 /* Day Two */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D5A1D6F445A0080E909 /* DayTwoComeBack.sks */,
+				9C561D5B1D6F445A0080E909 /* DayTwoComeBack.swift */,
+				9C561D5C1D6F445A0080E909 /* DayTwoGetPresent.sks */,
+				9C561D5E1D6F445A0080E909 /* DayTwoHiddenPictures.sks */,
+				9C561D601D6F445A0080E909 /* DayTwoScene.swift */,
+			);
+			name = "Day Two";
+			path = "Days/Day Two";
+			sourceTree = "<group>";
+		};
+		9C561D921D6F448C0080E909 /* Games */ = {
+			isa = PBXGroup;
+			children = (
+				9C561D931D6F448C0080E909 /* Card.swift */,
+				9C561D941D6F448C0080E909 /* CardGame.swift */,
+				9C561D951D6F448C0080E909 /* DragAndDropGame.sks */,
+				9C561D961D6F448C0080E909 /* DragAndDropGame.swift */,
+				9C561D971D6F448C0080E909 /* JigsawPuzzle.swift */,
+				9C561D981D6F448C0080E909 /* MazeGameScene.sks */,
+				9C561D991D6F448C0080E909 /* MazeGameScene.swift */,
+				9C561D9A1D6F448C0080E909 /* PlayASongGame.sks */,
+				9C561D9B1D6F448C0080E909 /* PlayASongGame.swift */,
+				9C561D9C1D6F448C0080E909 /* PolkaDotGame.sks */,
+				9C561D9D1D6F448C0080E909 /* PolkaDotGame.swift */,
+				9C561D9E1D6F448C0080E909 /* SimonGame.sks */,
+				9C561D9F1D6F448C0080E909 /* SimonGame.swift */,
+			);
+			path = Games;
+			sourceTree = "<group>";
+		};
+		9CD5864A1D377DA300190278 /* Additionals */ = {
+			isa = PBXGroup;
+			children = (
+				9CD5864B1D377DB900190278 /* snowfall.sks */,
+			);
+			path = Additionals;
+			sourceTree = "<group>";
+		};
+		B67B90FE5186CB4199748D99 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D8BB3D460B6CFB1B9EF5A41 /* Pods_OnePresent.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C3A645D1CE0C79600355C92 /* OnePresent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C3A64741CE0C79600355C92 /* Build configuration list for PBXNativeTarget "OnePresent" */;
+			buildPhases = (
+				01BA1D9E41CD12A882178CAD /* [CP] Check Pods Manifest.lock */,
+				9C3A645A1CE0C79600355C92 /* Sources */,
+				9C3A645B1CE0C79600355C92 /* Frameworks */,
+				9C3A645C1CE0C79600355C92 /* Resources */,
+				9C5C58611D5383FF00A99A5B /* ShellScript */,
+				AB17C0E39296D97FBCADAB0A /* [CP] Embed Pods Frameworks */,
+				34A5A169B82233B211A7E32C /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OnePresent;
+			productName = OnePresent;
+			productReference = 9C3A645E1CE0C79600355C92 /* OnePresent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C3A64561CE0C79600355C92 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = sjinnovation;
+				TargetAttributes = {
+					9C3A645D1CE0C79600355C92 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = HHN74N64DR;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9C3A64591CE0C79600355C92 /* Build configuration list for PBXProject "OnePresent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9C3A64551CE0C79600355C92;
+			productRefGroup = 9C3A645F1CE0C79600355C92 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C3A645D1CE0C79600355C92 /* OnePresent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C3A645C1CE0C79600355C92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C561D761D6F445A0080E909 /* DaySevenComeBack.sks in Resources */,
+				9C3A64701CE0C79600355C92 /* LaunchScreen.storyboard in Resources */,
+				9C03F1821CEA2F8300CB6C2E /* Chime blue.mp3 in Resources */,
+				9C561DA91D6F448C0080E909 /* PolkaDotGame.sks in Resources */,
+				9C3A646D1CE0C79600355C92 /* Assets.xcassets in Resources */,
+				9C561D611D6F445A0080E909 /* DayFiveComeBack.sks in Resources */,
+				9C561D8B1D6F445A0080E909 /* DayTwoComeBack.sks in Resources */,
+				9C561D651D6F445A0080E909 /* DayFiveHiddenPictures.sks in Resources */,
+				9C561D7F1D6F445A0080E909 /* DaySixGetPresent.sks in Resources */,
+				9C561D781D6F445A0080E909 /* DaySevenGetPresent.sks in Resources */,
+				9C2C38771D5E13880018BE61 /* IndexPageScene.sks in Resources */,
+				9C561DA71D6F448C0080E909 /* PlayASongGame.sks in Resources */,
+				9C561D731D6F445A0080E909 /* DayOneHiddenPictures.sks in Resources */,
+				9C561D6A1D6F445A0080E909 /* DayFourGetPresent.sks in Resources */,
+				9CD5864D1D377DB900190278 /* snowfall.sks in Resources */,
+				9C03F1811CEA2F8300CB6C2E /* Chime purple.mp3 in Resources */,
+				9C561D8F1D6F445A0080E909 /* DayTwoHiddenPictures.sks in Resources */,
+				9C03F17F1CEA2F8300CB6C2E /* Chime yellow.mp3 in Resources */,
+				9C561D841D6F445A0080E909 /* DayThreeComeBack.sks in Resources */,
+				9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */,
+				9C561D881D6F445A0080E909 /* DayThreeHiddenPictures.sks in Resources */,
+				9C561D6C1D6F445A0080E909 /* DayFourHiddenPictures.sks in Resources */,
+				9C561D7D1D6F445A0080E909 /* DaySixComeBack.sks in Resources */,
+				9C561D861D6F445A0080E909 /* DayThreeGetPresent.sks in Resources */,
+				9C561D7A1D6F445A0080E909 /* DaySevenHiddenPictures.sks in Resources */,
+				9C3A646B1CE0C79600355C92 /* Main.storyboard in Resources */,
+				9C561DAB1D6F448C0080E909 /* SimonGame.sks in Resources */,
+				9C03F1801CEA2F8300CB6C2E /* Chime green.mp3 in Resources */,
+				9C561D8D1D6F445A0080E909 /* DayTwoGetPresent.sks in Resources */,
+				9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */,
+				9C561D811D6F445A0080E909 /* DaySixHiddenPictures.sks in Resources */,
+				9C561D681D6F445A0080E909 /* DayFourComeBack.sks in Resources */,
+				9C561DA51D6F448C0080E909 /* MazeGameScene.sks in Resources */,
+				9C561D711D6F445A0080E909 /* DayOneGetPresent.sks in Resources */,
+				9C561D6F1D6F445A0080E909 /* DayOneComeBack.sks in Resources */,
+				9C561DA21D6F448C0080E909 /* DragAndDropGame.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01BA1D9E41CD12A882178CAD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		34A5A169B82233B211A7E32C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePresent/Pods-OnePresent-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C5C58611D5383FF00A99A5B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 1ccbb155e59c9408031cb62350ca284c4303cd2b 9bca2268087e9483a6098346e7f98c96e85850e40f8fcc8dc3915a1443497238";
+		};
+		AB17C0E39296D97FBCADAB0A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OnePresent/Pods-OnePresent-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C3A645A1CE0C79600355C92 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C3A64C91CE4D69400355C92 /* Constants.swift in Sources */,
+				9C561D6E1D6F445A0080E909 /* DayFourScene.swift in Sources */,
+				9C3A64931CE0F1B700355C92 /* SKColor+Extensions.swift in Sources */,
+				9C4317261D7DA2D2006297E0 /* HiddenPictures.swift in Sources */,
+				9C561DA81D6F448C0080E909 /* PlayASongGame.swift in Sources */,
+				9C561DA31D6F448C0080E909 /* DragAndDropGame.swift in Sources */,
+				9C561D621D6F445A0080E909 /* DayFiveComeBack.swift in Sources */,
+				9C2C38701D5E105D0018BE61 /* OnePresentPagesScene.swift in Sources */,
+				9C3A64971CE0F1B700355C92 /* SKTTimingFunctions.swift in Sources */,
+				9C561DA11D6F448C0080E909 /* CardGame.swift in Sources */,
+				9C561D911D6F445A0080E909 /* DayTwoScene.swift in Sources */,
+				9C3A64911CE0F1B700355C92 /* SKAction+Extensions.swift in Sources */,
+				9C561D7C1D6F445A0080E909 /* DaySevenScene.swift in Sources */,
+				9C3A64681CE0C79600355C92 /* OnePresentViewController.swift in Sources */,
+				9C561D8C1D6F445A0080E909 /* DayTwoComeBack.swift in Sources */,
+				9C3A648F1CE0F1B700355C92 /* CGVector+Extensions.swift in Sources */,
+				9C3A64951CE0F1B700355C92 /* SKTAudio.swift in Sources */,
+				9C3A64CA1CE4D69400355C92 /* Enums.swift in Sources */,
+				9C561D8A1D6F445A0080E909 /* DayThreeScene.swift in Sources */,
+				9C2C38781D5E13880018BE61 /* IndexPageScene.swift in Sources */,
+				9C3A648D1CE0F1B700355C92 /* CGFloat+Extensions.swift in Sources */,
+				9C561D691D6F445A0080E909 /* DayFourComeBack.swift in Sources */,
+				9C3A64CB1CE4D69400355C92 /* PuzzleBeziers.swift in Sources */,
+				9C3A64941CE0F1B700355C92 /* SKNode+Extensions.swift in Sources */,
+				9C017DEB1D76E44800947469 /* DrawingPage.swift in Sources */,
+				9C561DAA1D6F448C0080E909 /* PolkaDotGame.swift in Sources */,
+				9C2C38741D5E12870018BE61 /* TitlePage.swift in Sources */,
+				9C3A64961CE0F1B700355C92 /* SKTEffects.swift in Sources */,
+				9C3A64901CE0F1B700355C92 /* Int+Extensions.swift in Sources */,
+				9C561DA61D6F448C0080E909 /* MazeGameScene.swift in Sources */,
+				9C4317281D7DBA00006297E0 /* GetPresent.swift in Sources */,
+				9C561DAC1D6F448C0080E909 /* SimonGame.swift in Sources */,
+				9C3A64C41CE4D60900355C92 /* Extensions.swift in Sources */,
+				9C561DA41D6F448C0080E909 /* JigsawPuzzle.swift in Sources */,
+				9C561D771D6F445A0080E909 /* DaySevenComeBack.swift in Sources */,
+				9C561D851D6F445A0080E909 /* DayThreeComeBack.swift in Sources */,
+				9C561D831D6F445A0080E909 /* DaySixScene.swift in Sources */,
+				9C561DA01D6F448C0080E909 /* Card.swift in Sources */,
+				9C561D701D6F445A0080E909 /* DayOneComeBack.swift in Sources */,
+				9C3A648E1CE0F1B700355C92 /* CGPoint+Extensions.swift in Sources */,
+				9C3A64921CE0F1B700355C92 /* SKAction+SpecialEffects.swift in Sources */,
+				9C561D751D6F445A0080E909 /* DayOneScene.swift in Sources */,
+				9C561D671D6F445A0080E909 /* DayFiveScene.swift in Sources */,
+				9C561D7E1D6F445A0080E909 /* DaySixComeBack.swift in Sources */,
+				9C3A64981CE0F1B700355C92 /* Vector3.swift in Sources */,
+				9C3A64621CE0C79600355C92 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9C3A64691CE0C79600355C92 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C3A646A1CE0C79600355C92 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9C3A646E1CE0C79600355C92 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C3A646F1CE0C79600355C92 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9C3A64721CE0C79600355C92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9C3A64731CE0C79600355C92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C3A64751CE0C79600355C92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDD9637810A601580F37C87D /* Pods-OnePresent.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HHN74N64DR;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = OnePresent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sjinnovation.OnePresent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9C3A64761CE0C79600355C92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D823474E6D05BCA9F309B37 /* Pods-OnePresent.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = HHN74N64DR;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = OnePresent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sjinnovation.OnePresent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C3A64591CE0C79600355C92 /* Build configuration list for PBXProject "OnePresent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C3A64721CE0C79600355C92 /* Debug */,
+				9C3A64731CE0C79600355C92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C3A64741CE0C79600355C92 /* Build configuration list for PBXNativeTarget "OnePresent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C3A64751CE0C79600355C92 /* Debug */,
+				9C3A64761CE0C79600355C92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C3A64561CE0C79600355C92 /* Project object */;
+}
