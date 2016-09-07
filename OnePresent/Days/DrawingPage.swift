@@ -13,7 +13,7 @@ class DrawingPage: OnePresentPagesScene {
 
     var ref = CGMutablePath()
     var line = SKShapeNode()
-    var prevPage:OnePresentPagesScene! = nil
+    var prevPage:SKScene! = nil
     var color = UIColor.green
     let colors = ["green":UIColor(red: 128/255, green: 197/255, blue: 104/255, alpha: 1),
                   "red":UIColor(red: 255/255, green: 52/255, blue: 66/255, alpha: 1),
@@ -56,10 +56,10 @@ class DrawingPage: OnePresentPagesScene {
                 return
             }
             if btnRight.contains(location) {
-                nextScene = TitlePage(size: view!.bounds.size)
+//                nextScene = TitlePage(size: view!.bounds.size)
             } else if btnLeft.contains(location) {
                 if (prevPage != nil) {
-                    nextScene = prevPage
+//                    nextScene = prevPage
                 }
             } else {
 

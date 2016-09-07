@@ -84,7 +84,7 @@ class PolkaDotGame: SKScene {
                         if counter == 15 {
                             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
                             self.run(SKAction.afterDelay(4, runBlock: {
-                                if let scene = GetPresent(fileNamed:"DayOneGetPresent") {
+                                if let scene = GetPresentPage(fileNamed:"DayOneGetPresent") {
                                     scene.day = .dayOne
                                     let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                                     self.view?.presentScene(scene, transition: transition)

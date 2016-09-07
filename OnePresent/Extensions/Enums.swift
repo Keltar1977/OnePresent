@@ -32,6 +32,24 @@ enum HiddenObjects: String {
     case sled = "sled"
 }
 
+enum PresentsType: String {
+    //Page One
+    case yoyo = "yoyo"
+
+    //Page Two
+    case steam = "steam"
+
+    //Page Three
+    case bell = "bell"
+
+    //Page Four
+    case glow = "glow"
+
+    //Page Six
+    case lollipop = "lollipop"
+
+}
+
 enum BookDays: String {
     case dayOne = "DayOne"
     case dayTwo = "DayTwo"

@@ -57,7 +57,7 @@ class PlayASongGame: SKScene {
                             snowman.run(SKAction.move(to: endpoint.position, duration: 2)) {
                                 SKTAudio.sharedInstance().playSoundEffect("gameVictory")
                                 self.run(SKAction.afterDelay(4, runBlock: {
-                                    if let scene = GetPresent(fileNamed:"DayTwoGetPresent") {
+                                    if let scene = GetPresentPage(fileNamed:"DayTwoGetPresent") {
                                         scene.day = .dayTwo
                                         let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                                         self.view?.presentScene(scene, transition: transition)

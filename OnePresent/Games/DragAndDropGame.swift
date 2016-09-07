@@ -122,7 +122,7 @@ class DragAndDropGame: SKScene {
             if repeatCounter == 3 {
                 SKTAudio.sharedInstance().playSoundEffect("gameVictory")
                 self.run(SKAction.afterDelay(4, runBlock: {
-                    if let scene = GetPresent(fileNamed: "DaySixGetPresent") {
+                    if let scene = GetPresentPage(fileNamed: "DaySixGetPresent") {
                         scene.day = .daySix
                         let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                         self.view?.presentScene(scene, transition: transition)

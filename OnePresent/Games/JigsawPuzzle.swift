@@ -207,7 +207,7 @@ class JigsawPuzzle: SKScene {
         if !notInPosition {
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
             self.run(SKAction.afterDelay(4, runBlock: {
-                if let scene = GetPresent(fileNamed: "DayFourGetPresent") {
+                if let scene = GetPresentPage(fileNamed: "DayFourGetPresent") {
                     scene.day = .dayFour
                     let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                     self.view?.presentScene(scene, transition: transition)

@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class GetPresent: SKScene {
+class GetPresentPage: SKScene {
     var btnLeft:SKNode!
     var btnRight:SKNode!
     var originalPosition:CGPoint!
@@ -28,6 +28,49 @@ class GetPresent: SKScene {
             wrappPaper(imageName: day.rawValue + "WrappingPaper")
             return
         }
+        for touch in touches  {
+            let location = touch.location(in: self)
+            if btnLeft.contains(location) {
+                leftCaneTouched()
+                return
+            } else if btnRight.contains(location) {
+                rightCaneTouched()
+                return
+            }
+            guard day != .dayFive else {
+                return
+            }
+            handlePresentTouch(location: location)
+        }
+    }
+    
+    func handlePresentTouch(location:CGPoint) {
+        let presents = nodes(at: location)
+        for present in presents {
+            if let name = present.name {
+                if let presentType = PresentsType(rawValue:name) {
+                    switch presentType {
+                    case .yoyo:
+                        yoyoTouched(yoyo: present)
+                        break
+                    case .steam:
+                        steamTouched(steam: present)
+                        break
+                    case .bell:
+                        bellTouched(bell: present)
+                        break
+                    case .glow:
+                        glowingGlovesTouched(glow: present)
+                        break
+                    case .lollipop:
+                        lollipopTouched(lollipop: present)
+                        break
+                    }
+                }
+                
+            }
+            
+        }
     }
     
     private func wrappPaper(imageName:String) {
@@ -41,8 +84,18 @@ class GetPresent: SKScene {
         }
     }
     
-    private func yoyoTouched(yoyo:SKSpriteNode) {
-        let glow = childNode(withName: "glow")!
+    private func rightCaneTouched() {
+        if let nextPage = ComeBackPage(fileNamed: day.rawValue + "ComeBack") {
+            goToScene(nextPage, transition: .curlUp, fromIndexPage:false)
+        }
+    }
+    
+    private func leftCaneTouched() {
+        // PrevScene
+    }
+    
+    private func yoyoTouched(yoyo:SKNode) {
+        let glow = childNode(withName: "glowYoyo")!
         yoyo.name = "yoyoToched"
         yoyo.run(SKAction.animate(with: [SKTexture(image: #imageLiteral(resourceName: "yoyoTouchedImage"))], timePerFrame: 1, resize: true, restore: true)) {
             SKTAudio.sharedInstance().playSoundEffect("yoyoUp")
@@ -55,18 +108,18 @@ class GetPresent: SKScene {
         glow.run(SKAction.moveTo(y: glow.position.y - yoyo.frame.size.height * 1.5, duration: 0))
     }
     
-    private func steamTouched(steam:SKSpriteNode) {
+    private func steamTouched(steam:SKNode) {
         SKTAudio.sharedInstance().playSoundEffect("cupSound")
         run(SKAction.afterDelay(1, runBlock: {
             steam.zPosition = 2
         }))
     }
     
-    private func bellTouched(bell:SKSpriteNode) {
+    private func bellTouched(bell:SKNode) {
         run(SKAction.screenRotateWithNode(bell, angle: 2, oscillations: -2, duration: 2))
     }
     
-    private func glowingGlovesTouched(glow:SKSpriteNode) {
+    private func glowingGlovesTouched(glow:SKNode) {
         let snowball = childNode(withName: "snowball")!
         originalPosition = snowball.position
         glow.name = "moving"
@@ -96,7 +149,7 @@ class GetPresent: SKScene {
         self.addChild(line)
     }
     
-    private func lollipopTouched(lollipop:SKSpriteNode) {
+    private func lollipopTouched(lollipop:SKNode) {
         SKTAudio.sharedInstance().playSoundEffect("lollipopSound")
         clickNumber = (clickNumber + 1) % 4
         lollipop.run(SKAction.setTexture(SKTexture(imageNamed: "lollipop\(clickNumber)")))

@@ -37,28 +37,23 @@ class IndexPageScene: OnePresentPagesScene {
             for present in nodes(at: location) {
                 if let name = present.name, let day = BookDays(rawValue:name) {
                     SKTAudio.sharedInstance().pauseBackgroundMusic()
-                    var scene:OnePresentPagesScene
+                    let pageNumbers:Int
                     switch day {
                     case .dayOne:
-                        scene = DayOneScene(size: self.view!.bounds.size)
-                    case .dayTwo:
-                        scene = DayTwoScene(size: self.view!.bounds.size)
-                    case .dayThree:
-                        scene = DayThreeScene(size: self.view!.bounds.size)
-                    case .dayFour:
-                        scene = DayFourScene(size: self.view!.bounds.size)
-                    case .dayFive:
-                        scene = DayFiveScene(size: self.view!.bounds.size)
-                    case .daySix:
-                        scene = DaySixScene(size: self.view!.bounds.size)
+                        pageNumbers = 4
                     case .daySeven:
-                        scene = DaySevenScene(size: self.view!.bounds.size)
+                        pageNumbers = 5
+                    default:
+                        pageNumbers = 2
                     }
-                    scene.index = 0
+                    let scene = OnePresentPagesScene(size: self.view!.bounds.size)
+                    let bookChapter = BookChapter(day: day, pageNumbers: pageNumbers)
+                    scene.bookChapter = bookChapter
                     SKTAudio.sharedInstance().playSoundEffect("openPresent")
                     run(SKAction.screenRotateWithNode(present, angle: 1, oscillations: 1, duration: 1))
                     present.run(SKAction.jumpToHeight(50, duration: 1, originalPosition: present.position)) {
-                        self.goToScene(scene, transition: .curlUp)
+                        SKTAudio.sharedInstance().playSoundEffect("pageFlip")
+                        self.goToScene(scene, transition: .curlUp, fromIndexPage: self.bookChapter.fromIndexPage)
                     }
                 }
             }

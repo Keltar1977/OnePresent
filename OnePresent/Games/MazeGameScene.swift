@@ -98,7 +98,7 @@ class MazeGameScene: SKScene {
     func alertWon() {
         SKTAudio.sharedInstance().playSoundEffect("gameVictory")
         self.run(SKAction.afterDelay(4, runBlock: {
-            if let scene = GetPresent(fileNamed: "DaySevenGetPresent") {
+            if let scene = GetPresentPage(fileNamed: "DaySevenGetPresent") {
                 scene.day = .daySeven
                 let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                 self.view?.presentScene(scene, transition: transition)

@@ -37,8 +37,8 @@ class OnePresentViewController: UIViewController {
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             let skView = self.view as! SKView
-            if let scene = skView.scene as? OnePresentPagesScene, scene.isComeBackPage == true {
-                scene.startSnowfall()
+            if let scene = skView.scene as? ComeBackPage {
+                scene.snowfall = scene.startSnowfall(emitterNode: scene.snowfall)
             }
         }
     }

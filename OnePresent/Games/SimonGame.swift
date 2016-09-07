@@ -84,7 +84,7 @@ class SimonGame: SKScene {
         if lengthOfSequance == 4 {
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
             self.run(SKAction.afterDelay(4, runBlock: {
-                if let scene = GetPresent(fileNamed: "DayFiveGetPresent") {
+                if let scene = GetPresentPage(fileNamed: "DayFiveGetPresent") {
                     scene.day = .dayFive
                     let transition = SKTransition.moveIn(with: .right, duration: 0.3)
                     self.view?.presentScene(scene, transition: transition)

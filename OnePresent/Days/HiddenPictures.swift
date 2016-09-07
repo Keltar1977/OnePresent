@@ -386,7 +386,7 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func spoonTouched(spoon:SKNode) {
-        guard pictureNumber == 3 else {
+        guard pictureNumber == 2 else {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("spoonSound")
@@ -397,7 +397,7 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func sledTouched(sled:SKNode) {
-        guard pictureNumber == 1 else {
+        guard pictureNumber == 3 else {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("sledSound")
@@ -420,9 +420,6 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func setHint() {
-        guard pictureNumber == 2 else {
-            return
-        }
         SKTAudio.sharedInstance().playSoundEffect("hintAppear")
         for i in 1...3 {
             if let hint = childNode(withName: "hint\(i)") {
@@ -437,9 +434,6 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func startGame(_ scene: SKScene) {
-        guard pictureNumber == 3 else {
-            return
-        }
         scene.scaleMode = .fill
         SKTAudio.sharedInstance().playSoundEffect("startGame")
         let transition = SKTransition.moveIn(with: .right, duration: 1)
