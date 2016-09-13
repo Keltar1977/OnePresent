@@ -19,7 +19,11 @@ class SimonGame: SKScene {
     var counter = 0
     var updating = false
     override func didMove(to view: SKView) {
-        
+        if let node = childNode(withName: "DayFivePresentImage") {
+            run(SKAction.afterDelay(2, runBlock: {
+                node.zPosition = -2
+            }))
+        }
         nodeArray = [childNode(withName: "blue")!,childNode(withName: "yellow")!,childNode(withName: "green")!,childNode(withName: "purple")!]
         updateSequance()
     }
@@ -51,6 +55,7 @@ class SimonGame: SKScene {
                         self.updateSequance()
                     })
                 } else if !hasMatch {
+                    sequance.removeAll()
                     counter = 0
                     lengthOfSequance = 0
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
@@ -81,17 +86,16 @@ class SimonGame: SKScene {
     
     func updateSequance() {
         lengthOfSequance += 1
-        if lengthOfSequance == 4 {
+        guard lengthOfSequance != 6 else {
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
             self.run(SKAction.afterDelay(4, runBlock: {
                 if let scene = GetPresentPage(fileNamed: "DayFiveGetPresent") {
                     scene.day = .dayFive
-                    let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                    self.view?.presentScene(scene, transition: transition)
+                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
                 }
             }))
+            return
         }
-        sequance.removeAll()
         generateSequance()
         playSequance()
         updating = false
@@ -105,7 +109,7 @@ class SimonGame: SKScene {
             for node in nodeArray {
                 if node.name == resolveColors(sequance[i]) {
                     actionArray.append(playNode(node))
-                    actionArray.append(SKAction.wait(forDuration: 1.5))
+                    actionArray.append(SKAction.wait(forDuration: 0.5))
                 }
             }
         }
@@ -131,9 +135,7 @@ class SimonGame: SKScene {
     }
     
     func generateSequance() {
-        for _ in 0..<lengthOfSequance {
-            sequance.append(Int.random(0, max: 3))
-        }
+        sequance.append(Int.random(0, max: 3))
     }
     
 }

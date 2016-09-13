@@ -21,10 +21,14 @@ class GetPresentPage: SKScene {
     override func didMove(to view: SKView) {
         btnLeft = childNode(withName: "leftCane")
         btnRight = childNode(withName: "rightCane")
+        SKTAudio.sharedInstance().playNarration("wrappingPaperNarration")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard wrappCounter >= 3 else {
+        guard wrappCounter >= 4 else {
+            if let node = childNode(withName: "presentText") {
+                node.zPosition = -1
+            }
             wrappPaper(imageName: day.rawValue + "WrappingPaper")
             return
         }
@@ -38,9 +42,18 @@ class GetPresentPage: SKScene {
                 return
             }
             guard day != .dayFive else {
+                ref.move(to: location)
                 return
             }
             handlePresentTouch(location: location)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            if  day == .dayFive, wrappCounter >= 4 {
+                drawOnScene(touch: touch)
+            }
         }
     }
     
@@ -76,22 +89,38 @@ class GetPresentPage: SKScene {
     private func wrappPaper(imageName:String) {
         wrappCounter += 1
         if let present = childNode(withName: "present") as? SKSpriteNode {
-            present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter + 1)")))
-            present.run(SKAction.afterDelay(3, runBlock: {
-                present.zPosition = CGFloat(self.wrappCounter % 3) * CGFloat(4)
-            }))
-            SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter)")
+            
+            
+            if wrappCounter == 4 {
+                present.run(SKAction.setTexture(SKTexture(imageNamed:"wrappingBackground")))
+                present.run(SKAction.afterDelay(1, runBlock: {
+                    present.zPosition = 0
+                    SKTAudio.sharedInstance().playNarration(self.day.rawValue + "Present")
+                }))
+            } else {
+                present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter + 1)")))
+                SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter)")
+            }
+            
+            
         }
     }
     
     private func rightCaneTouched() {
-        if let nextPage = ComeBackPage(fileNamed: day.rawValue + "ComeBack") {
+        if day == BookDays.daySeven, let nextPage = BookEnding(fileNamed: "OnePresentPagesScene") {
+            nextPage.bookChapter = BookChapter(day: .daySeven, pageNumbers: 3)
+            nextPage.bookChapter.pageIndex = 1
+            goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+        } else if let nextPage = ComeBackPage(fileNamed: day.rawValue + "ComeBack") {
+            nextPage.day = day
             goToScene(nextPage, transition: .curlUp, fromIndexPage:false)
         }
     }
     
     private func leftCaneTouched() {
-        // PrevScene
+        if let nextScene = HiddenPictures(fileNamed:day.rawValue + "HiddenPictures") {
+            goToScene(nextScene,transition: .curlUp, fromIndexPage: false)
+        }
     }
     
     private func yoyoTouched(yoyo:SKNode) {
@@ -116,6 +145,7 @@ class GetPresentPage: SKScene {
     }
     
     private func bellTouched(bell:SKNode) {
+        SKTAudio.sharedInstance().playSoundEffect("bellTouched")
         run(SKAction.screenRotateWithNode(bell, angle: 2, oscillations: -2, duration: 2))
     }
     

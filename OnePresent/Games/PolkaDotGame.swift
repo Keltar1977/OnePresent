@@ -14,16 +14,13 @@ class PolkaDotGame: SKScene {
 
     var dotArray  = [SKSpriteNode]()
     var counter = 0
-    var cameraNode:SKCameraNode!
 
     override func didMove(to view: SKView) {
-
-        let cameraNode = SKCameraNode()
-        cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
-        self.addChild(cameraNode)
-        self.camera = cameraNode
-        let panGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(panGesture)
+        if let node = childNode(withName: "DayOnePresentImage") {
+            run(SKAction.afterDelay(2, runBlock: { 
+                node.zPosition = -2
+            }))
+        }
         createNewDot()
     }
     
@@ -86,8 +83,7 @@ class PolkaDotGame: SKScene {
                             self.run(SKAction.afterDelay(4, runBlock: {
                                 if let scene = GetPresentPage(fileNamed:"DayOneGetPresent") {
                                     scene.day = .dayOne
-                                    let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                                    self.view?.presentScene(scene, transition: transition)
+                                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
                                 }
                             }))
                         } else {
@@ -99,18 +95,6 @@ class PolkaDotGame: SKScene {
                 }
             }
         }
-    }
-    
-
-    func handlePan(pinchGesture:UIPinchGestureRecognizer) {
-        let scale:CGFloat!
-        if pinchGesture.velocity >= 0 {
-            scale = 1
-        } else {
-            scale = 0.5
-        }
-        let zoomInAction = SKAction.scale(to: scale, duration: 0.5)
-        self.camera?.run(zoomInAction)
     }
     
 }

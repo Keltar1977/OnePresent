@@ -22,6 +22,13 @@ class CardGame: SKScene {
         backgoround.position = view.center
         backgoround.zPosition = -1
         addChild(backgoround)
+        let present = SKSpriteNode(texture: SKTexture(imageNamed:"DayThreePresentImage"), size: view.frame.size)
+        present.position = view.center
+        present.zPosition = 4
+        addChild(present)
+        run(SKAction.afterDelay(2, runBlock: { 
+            present.zPosition = -2
+        }))
         for i in 0 ..< 12 {
             let k = i%4
             let j = i/4
@@ -69,8 +76,7 @@ class CardGame: SKScene {
                         self.run(SKAction.afterDelay(4, runBlock: {
                             if let scene = GetPresentPage(fileNamed: "DayThreeGetPresent") {
                                 scene.day = .dayThree
-                                let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                                self.view?.presentScene(scene, transition: transition)
+                                self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
                             }
                         }))
                         

@@ -19,9 +19,11 @@ class ComeBackPage: SKScene {
     
     override func didMove(to view: SKView) {
         let userdefaults = UserDefaults.standard
-        userdefaults.set(true, forKey: "number1")
+        userdefaults.set(true, forKey: day.rawValue + "Number")
+        SKTAudio.sharedInstance().playNarration(day.rawValue + "NarrationComeBack")
         btnLeft = childNode(withName: "leftCane")
         btnRight = childNode(withName: "rightCane")
+        SKTAudio.sharedInstance().playBackgroundMusic("windBlow")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
@@ -30,24 +32,35 @@ class ComeBackPage: SKScene {
             if let paint = childNode(withName: "paint") {
                 guard !paint.contains(location) else {
                     if let nextPage = DrawingPage(fileNamed:"DrawingPage") {
-//                        nextPage.prevPage = self
-//                        nextPage.index = 1
-//                        goToScene(nextPage, transition: .curlUp)
+                        nextPage.prevPage = self
+                        nextPage.day = day
+                        goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
                     }
                     return
                 }
             }
             giveHighFive(location: location)
             if btnRight.contains(location) {
-//                nextScene = TitlePage(size: view!.bounds.size)
+                if let nextPage = TitlePage(fileNamed: "TitlePage") {
+                    goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+                }
+                
             } else if btnLeft.contains(location) {
-                //                nextScene = GetPresent(fileNamed: "DayOneGetPresent")
+                if day == BookDays.daySeven, let nextPage = BookEnding(fileNamed: "OnePresentPagesScene") {
+                    nextPage.bookChapter = BookChapter(day: .daySeven, pageNumbers: 3)
+                    nextPage.bookChapter.pageIndex = 3
+                    goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+                } else if let nextPage = GetPresentPage(fileNamed: day.rawValue + "GetPresent") {
+                    nextPage.day = day
+                    goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+                }
             }
         }
     }
     
     func giveHighFive(location:CGPoint) {
         if let hand = childNode(withName: "hand"), hand.contains(location) {
+            SKTAudio.sharedInstance().playSoundEffect("snowman high 5")
             hand.name = "touchedHand"
             hand.run(SKAction.actionWithEffect(SKTRotateEffect(node: hand,
                                                                duration: 0.25,
@@ -57,4 +70,10 @@ class ComeBackPage: SKScene {
             hand.run(SKAction.moveTo(x: hand.position.x + 20, duration: 0.125))
         }
     }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseBackgroundMusic()
+    }
+    
+    
 }

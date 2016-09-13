@@ -11,6 +11,7 @@ import SpriteKit
 
 class DrawingPage: OnePresentPagesScene {
 
+    var day:BookDays!
     var ref = CGMutablePath()
     var line = SKShapeNode()
     var prevPage:SKScene! = nil
@@ -27,7 +28,7 @@ class DrawingPage: OnePresentPagesScene {
                   "white":UIColor.white]
     
     override func didMove(to view: SKView) {
-        let pageContent = SKSpriteNode(imageNamed: "DrawDay\(index)")
+        let pageContent = SKSpriteNode(imageNamed: "Draw" + day.rawValue)
         pageContent.zPosition = 0
         addChild(pageContent)
         btnLeft = childNode(withName: "leftCane") as! SKSpriteNode
@@ -56,16 +57,16 @@ class DrawingPage: OnePresentPagesScene {
                 return
             }
             if btnRight.contains(location) {
-//                nextScene = TitlePage(size: view!.bounds.size)
+                if let nextPage = TitlePage(fileNamed: "TitlePage") {
+                    goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+                }
             } else if btnLeft.contains(location) {
                 if (prevPage != nil) {
-//                    nextScene = prevPage
+                    goToScene(prevPage, transition: .curlUp, fromIndexPage: false)
                 }
             } else {
-
                 ref.move(to: location)
             }
-            super.touchesBegan(touches, with: event)
         }
     }
     

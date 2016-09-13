@@ -25,6 +25,11 @@ class DragAndDropGame: SKScene {
     
     
     override func didMove(to view: SKView) {
+        if let node = childNode(withName: "DaySixPresentImage") {
+            run(SKAction.afterDelay(2, runBlock: {
+                node.zPosition = -2
+            }))
+        }
         let pointA = self.childNode(withName: "pointA")
         let pointB = self.childNode(withName: "pointB")
         let pointC = self.childNode(withName: "pointC")
@@ -124,12 +129,14 @@ class DragAndDropGame: SKScene {
                 self.run(SKAction.afterDelay(4, runBlock: {
                     if let scene = GetPresentPage(fileNamed: "DaySixGetPresent") {
                         scene.day = .daySix
-                        let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                        self.view?.presentScene(scene, transition: transition)
+                        self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
                     }
                 }))
             } else {
-                resetGame()
+                run(SKAction.afterDelay(0.5, runBlock: {
+                    SKTAudio.sharedInstance().playSoundEffect("bellJingle")
+                    self.resetGame()
+                }))
             }
         }
     }

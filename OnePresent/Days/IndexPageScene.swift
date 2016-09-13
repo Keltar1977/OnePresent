@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class IndexPageScene: OnePresentPagesScene {
+class IndexPageScene: SKScene {
 
     
     override func didMove(to view: SKView) {
@@ -19,8 +19,8 @@ class IndexPageScene: OnePresentPagesScene {
         }
         let userdefaults = UserDefaults.standard
         
-        for  i in 1...7 {
-            if let number = self.childNode(withName: "number\(i)"), userdefaults.bool(forKey: "number\(i)") {
+        for  day in BookDays.allValues {
+            if let number = self.childNode(withName: day.rawValue + "Number"), userdefaults.bool(forKey: day.rawValue + "Number") {
                 let glowLayer = SKSpriteNode(imageNamed: "presentNumberGlowing")
                 glowLayer.position = number.position
                 glowLayer.zPosition = 2
@@ -41,19 +41,17 @@ class IndexPageScene: OnePresentPagesScene {
                     switch day {
                     case .dayOne:
                         pageNumbers = 4
-                    case .daySeven:
-                        pageNumbers = 5
                     default:
                         pageNumbers = 2
                     }
-                    let scene = OnePresentPagesScene(size: self.view!.bounds.size)
-                    let bookChapter = BookChapter(day: day, pageNumbers: pageNumbers)
-                    scene.bookChapter = bookChapter
-                    SKTAudio.sharedInstance().playSoundEffect("openPresent")
-                    run(SKAction.screenRotateWithNode(present, angle: 1, oscillations: 1, duration: 1))
-                    present.run(SKAction.jumpToHeight(50, duration: 1, originalPosition: present.position)) {
-                        SKTAudio.sharedInstance().playSoundEffect("pageFlip")
-                        self.goToScene(scene, transition: .curlUp, fromIndexPage: self.bookChapter.fromIndexPage)
+                    if let scene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
+                        let bookChapter = BookChapter(day: day, pageNumbers: pageNumbers)
+                        scene.bookChapter = bookChapter
+                        SKTAudio.sharedInstance().playSoundEffect("openPresent")
+                        run(SKAction.screenRotateWithNode(present, angle: 1, oscillations: 1, duration: 1))
+                        present.run(SKAction.jumpToHeight(50, duration: 1, originalPosition: present.position)) {
+                            self.simpleTransition(scene, startGame: false, direction: .right)
+                        }
                     }
                 }
             }

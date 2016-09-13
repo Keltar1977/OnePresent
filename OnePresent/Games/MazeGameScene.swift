@@ -16,6 +16,11 @@ class MazeGameScene: SKScene {
     
     override func didMove(to view: SKView) {
 
+        if let node = childNode(withName: "DaySevenPresentImage") {
+            run(SKAction.afterDelay(2, runBlock: {
+                node.zPosition = -2
+            }))
+        }
         physicsWorld.contactDelegate = self
         
         sled = SKSpriteNode(imageNamed: "redDot")
@@ -100,8 +105,7 @@ class MazeGameScene: SKScene {
         self.run(SKAction.afterDelay(4, runBlock: {
             if let scene = GetPresentPage(fileNamed: "DaySevenGetPresent") {
                 scene.day = .daySeven
-                let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                self.view?.presentScene(scene, transition: transition)
+                self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
             }
         }))
 

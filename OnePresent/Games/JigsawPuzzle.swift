@@ -24,14 +24,21 @@ class JigsawPuzzle: SKScene {
         super.didMove(to: view)
         scaleMode = .fill
         backgroundColor = UIColor.lightGray
-        imageSize = CGSize(width: 400, height: 400)
-        setBorder()
-        startNewPuzzleGameLevel()
         let background = SKSpriteNode(imageNamed: "puzzleBackground")
         background.size = view.frame.size
         background.position = view.center
         background.zPosition = 0
         addChild(background)
+        let present = SKSpriteNode(texture: SKTexture(imageNamed:"DayFourPresentImage"), size: view.frame.size)
+        present.position = view.center
+        present.zPosition = 4
+        addChild(present)
+        run(SKAction.afterDelay(2, runBlock: {
+            present.zPosition = -2
+            self.imageSize = CGSize(width: 400, height: 400)
+            self.setBorder()
+            self.startNewPuzzleGameLevel()
+        }))
     }
 
     func startNewPuzzleGameLevel() {
@@ -209,8 +216,7 @@ class JigsawPuzzle: SKScene {
             self.run(SKAction.afterDelay(4, runBlock: {
                 if let scene = GetPresentPage(fileNamed: "DayFourGetPresent") {
                     scene.day = .dayFour
-                    let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                    self.view?.presentScene(scene, transition: transition)
+                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
                 }
             }))
         }

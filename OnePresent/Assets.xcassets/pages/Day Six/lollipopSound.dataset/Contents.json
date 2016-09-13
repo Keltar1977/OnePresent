@@ -6,7 +6,8 @@
   "data" : [
     {
       "idiom" : "universal",
-      "filename" : "lollipopSound.mp3"
+      "filename" : "lollipop lick.mp3",
+      "universal-type-identifier" : "public.mp3"
     }
   ]
 }

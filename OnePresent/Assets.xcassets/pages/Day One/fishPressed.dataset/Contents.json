@@ -6,7 +6,8 @@
   "data" : [
     {
       "idiom" : "universal",
-      "filename" : "fishPressed.mp3"
+      "filename" : "Fish jump.mp3",
+      "universal-type-identifier" : "public.mp3"
     }
   ]
 }
