@@ -3,94 +3,120 @@ import SpriteKit
 
 class OnePresentPagesScene: SKScene {
 
-    var index:Int = 0
-    var btnLeft = SKSpriteNode(imageNamed: "candyCaneLeft")
-    var btnRight = SKSpriteNode(imageNamed: "candyCaneRight")
-    final let dancingPresent = SKSpriteNode(imageNamed: "dancingPresent")
-    var fromIndexPage = false
-    var nextScene:OnePresentPagesScene!
-    var isComeBackPage = false
+    var btnLeft = SKNode()
+    var btnRight = SKNode()
+    var readYourselfButton = SKNode()
+    var readAloneButton = SKNode()
     var snowfall:SKEmitterNode! = nil
+    var bookChapter:BookChapter!
     
+
     
     override func didMove(to view: SKView) {
 
+        if let pageContent = childNode(withName: "pageContent") {
+            let texture = SKTexture(imageNamed: bookChapter.day.rawValue + "Page \(bookChapter.pageIndex)")
+            pageContent.run(SKAction.setTexture(texture))
+        }
+        if bookChapter.fromIndexPage {
+            SKTAudio.sharedInstance().playSoundEffect("dayPageAppear")
+        }
+        run(SKAction.afterDelay(1, runBlock: {
+            let narration = self.bookChapter.day.rawValue + "NarrationPage\(self.bookChapter.pageIndex)"
+            SKTAudio.sharedInstance().playNarration(narration)
+        }))
+        setUpFooter()
     }
     
     final func setUpFooter() {
-        if fromIndexPage {
-            SKTAudio.sharedInstance().playSoundEffect("dayPageAppear")
-            btnRight = SKSpriteNode(imageNamed: "readAlong")
-            btnLeft = SKSpriteNode(imageNamed: "readYourself")
-            btnRight.position = CGPoint(x:(3 * self.size.width)/4, y: self.size.height/4)
-            btnRight.zPosition = 1
-            btnLeft.position = CGPoint(x: self.size.width/4, y:  self.size.height/4)
-            btnLeft.zPosition = 1
-            addChild(btnRight)
-            addChild(btnLeft)
-        } else {
-            btnRight.position = CGPoint(x: self.size.width - 70, y: self.size.height/2)
-            btnRight.zPosition = 3
-            addChild(btnRight)
-            if index > 0 {
-                btnLeft.position = CGPoint(x: 70, y: self.size.height/2)
-                btnLeft.zPosition = 3
-                addChild(btnLeft)
-            }
+        if let node = childNode(withName: "rightCane") {
+            btnRight = node
+        }
+        if let node = childNode(withName: "leftCane") {
+            btnLeft = node
+        }
+        if let node = childNode(withName: "readYourself") {
+            readYourselfButton = node
+        }
+        if let node = childNode(withName: "readAlone") {
+            readAloneButton = node
+        }
+        if bookChapter.fromIndexPage {
+            btnRight.zPosition = -1
+            readAloneButton.zPosition = 3
+            readYourselfButton.zPosition = 3
         }
     }
-    
-    func giveHighFive(location:CGPoint) {
-        if let hand = childNode(withName: "hand"), hand.contains(location) {
-            hand.name = "touchedHand"
-            hand.run(SKAction.actionWithEffect(SKTRotateEffect(node: hand, duration: 0.25, startAngle: 0, endAngle: -1.5)))
-            hand.run(SKAction.moveTo(y: hand.position.y - 140, duration: 0.25))
-            hand.run(SKAction.moveTo(x: hand.position.x + 20, duration: 0.125))
-        }
-    }
-    
 
-    
-    final func startSnowfall () {
-        let path = Bundle.main.path(forResource: "snowfall", ofType: "sks")
-        if let node = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode, snowfall == nil {
-            snowfall = node
-            snowfall.position = CGPoint(x:self.size.width/2 ,y:self.size.height)
-            snowfall.name = "snowfall"
-            snowfall.targetNode = self.scene
-            snowfall.zPosition = 100
-            self.addChild(snowfall)
-        }
-
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
         super.touchesBegan(touches!, with: event)
         
         for touch in touches!  {
             let location = touch.location(in: self)
-             if btnRight.contains(location) {
-                nextScene.index = self.index + 1
-                goToScene(nextScene,transition: .curlUp)
-            } else if btnLeft.contains(location) {
-                var transition: UIViewAnimationTransition
-                if fromIndexPage {
-                    nextScene.index = self.index + 1
-                    transition = .curlUp
-                } else {
-                    nextScene.index = self.index - 1
-                    transition = .curlDown
+            
+            if bookChapter.fromIndexPage, readYourselfButton.contains(location) || readAloneButton.contains(location) {
+                firstPageTouch(location: location)
+            } else if bookChapter.fromIndexPage, btnLeft.contains(location) {
+                if let nextScene = IndexPageScene(fileNamed:"IndexPageScene") {
+                    simpleTransition(nextScene, startGame: false, direction: .left)
                 }
-                goToScene(nextScene,transition: transition)
-             }
+            } else if bookChapter.pageIndex == bookChapter.pageNumbers, btnRight.contains(location) {
+                if let nextScene = HiddenPictures(fileNamed:bookChapter.day.rawValue + "HiddenPictures") {
+                    nextScene.day = bookChapter.day 
+                    goToScene(nextScene,transition: .curlUp, fromIndexPage: bookChapter.fromIndexPage)
+                }
+            } else if btnLeft.contains(location) || btnRight.contains(location) {
+                if let nextScene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
+                    candyCaneTouched(nextScene:nextScene, location: location)
+                }
+            }
+        }
+    }
+    func candyCaneTouched(nextScene:OnePresentPagesScene,location:CGPoint) {
+        nextScene.bookChapter = self.bookChapter
+        var transition = UIViewAnimationTransition.curlUp
+        nextScene.bookChapter.pageIndex = self.bookChapter.pageIndex + 1
+        if btnLeft.contains(location) {
+            transition = .curlDown
+            nextScene.bookChapter.pageIndex = self.bookChapter.pageIndex - 1
+        }
+        if nextScene.bookChapter.fromIndexPage {
+            simpleTransition(nextScene, startGame: false, direction: .left)
+        } else {
+           goToScene(nextScene,transition: transition, fromIndexPage: bookChapter.fromIndexPage)
+        }
+        
+
+    }
+    
+    func firstPageTouch(location:CGPoint) {
+        var narration = false
+        if readAloneButton.contains(location) {
+            narration = true
+        }
+        SKTAudio.sharedInstance().withNarration = narration
+        if let nextScene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
+            nextScene.bookChapter = self.bookChapter
+            nextScene.bookChapter.pageIndex = self.bookChapter.pageIndex + 1
+            nextScene.bookChapter.narration = narration
+            SKTAudio.sharedInstance().playSoundEffect("dayButtonPressed")
+            simpleTransition(nextScene, startGame: false, direction: .right)
         }
     }
     
-    final func goToScene(_ scene: SKScene, transition:UIViewAnimationTransition) {
-        scene.scaleMode = .aspectFill
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseNarration()
+    }
+    
+
+}
+
+extension SKScene {
+    final func goToScene(_ scene: SKScene, transition:UIViewAnimationTransition, fromIndexPage:Bool) {
+        scene.scaleMode = .fill
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDelegate(self)
-        UIView.setAnimationDuration(0.2)
+        UIView.setAnimationDuration(0.4)
         UIView.setAnimationTransition(transition, for: self.view!, cache: false)
         UIView.commitAnimations()
         if fromIndexPage {
@@ -98,17 +124,46 @@ class OnePresentPagesScene: SKScene {
         } else {
             SKTAudio.sharedInstance().playSoundEffect("pageFlip")
         }
-        UIView.animate(withDuration: 0.001, animations: {
+        UIView.animate(withDuration: 0.6, animations: {
             self.view?.presentScene(scene)
         }) { (finished) in
             
         }
-        
     }
     
-
+    final func startSnowfall (emitterNode:SKEmitterNode?) -> SKEmitterNode {
+        let path = Bundle.main.path(forResource: "snowfall", ofType: "sks")
+        if let node = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as? SKEmitterNode, emitterNode == nil {
+            node.position = CGPoint(x:self.size.width/2 ,y:self.size.height)
+            node.name = "snowfall"
+            node.targetNode = self.scene
+            node.zPosition = 100
+            self.addChild(node)
+            return node
+        }
+        return emitterNode!
+    }
     
-
+    final func simpleTransition(_ scene: SKScene, startGame:Bool, direction: SKTransitionDirection) {
+        scene.scaleMode = .fill
+        if startGame {
+            SKTAudio.sharedInstance().playSoundEffect("startGame")
+        } else {
+            SKTAudio.sharedInstance().playSoundEffect("pageFlip")
+        }
+        let transition = SKTransition.moveIn(with: direction, duration: 1)
+        self.view?.presentScene(scene, transition: transition)
+    }
     
-
+    func explosionAnimation(explosion:SKNode ,scene:SKScene) {
+        explosion.zPosition = 100
+        var textures:[SKTexture] = []
+        for i in 1...8 {
+            let texture = SKTexture(imageNamed: "explosion\(i)")
+            textures.append(texture)
+        }
+        explosion.run(SKAction.animate(with: textures, timePerFrame: 0.2, resize: true, restore: false)) {
+            self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+        }
+    }
 }

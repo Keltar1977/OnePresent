@@ -19,19 +19,27 @@ class JigsawPuzzle: SKScene {
     var movingPiece: Piece?
     var maxZPosition: CGFloat = Layer.Tiles
     var imageSize: CGSize!
+    var willTransit = false
 
      override func didMove(to view: SKView) {
         super.didMove(to: view)
         scaleMode = .fill
         backgroundColor = UIColor.lightGray
-        imageSize = CGSize(width: 400, height: 400)
-        setBorder()
-        startNewPuzzleGameLevel()
         let background = SKSpriteNode(imageNamed: "puzzleBackground")
         background.size = view.frame.size
         background.position = view.center
         background.zPosition = 0
         addChild(background)
+        let present = SKSpriteNode(texture: SKTexture(imageNamed:"DayFourPresentImage"), size: view.frame.size)
+        present.position = view.center
+        present.zPosition = 4
+        addChild(present)
+        present.run(SKAction.fadeOut(withDuration: 3)) {
+            present.zPosition = -2
+            self.imageSize = CGSize(width: 400, height: 400)
+            self.setBorder()
+            self.startNewPuzzleGameLevel()
+        }
     }
 
     func startNewPuzzleGameLevel() {
@@ -120,30 +128,33 @@ class JigsawPuzzle: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let loc = touch.location( in: border!)
-            let nodes = border!.nodes(at: loc)
-            var piecess = [Piece]()
-            for node in nodes where node.name == pieceName {
-                if node.isKind(of:Piece.self) {
-                    piecess.append((node as? Piece)!)
+        if let puzzleBorder = border {
+            for touch in touches {
+                let loc = touch.location( in: puzzleBorder)
+                let nodes = puzzleBorder.nodes(at: loc)
+                var piecess = [Piece]()
+                for node in nodes where node.name == pieceName {
+                    if node.isKind(of:Piece.self) {
+                        piecess.append((node as? Piece)!)
+                    }
                 }
-            }
-            var minElem = CGFloat.leastNormalMagnitude
-            var index: Int = 0
-            for piece in piecess {
-                if piece.zPosition > minElem {
-                    minElem += piece.zPosition
-                    index = piecess.index(of: piece)!
+                var minElem = CGFloat.leastNormalMagnitude
+                var index: Int = 0
+                for piece in piecess {
+                    if piece.zPosition > minElem {
+                        minElem += piece.zPosition
+                        index = piecess.index(of: piece)!
+                    }
                 }
-            }
-            if piecess.count > 0 {
-                maxZPosition += 1
-                movingPiece = piecess[index] as Piece
-                movingPiece?.zPosition = maxZPosition
-                movingPiece?.touchStart()
+                if piecess.count > 0 {
+                    maxZPosition += 1
+                    movingPiece = piecess[index] as Piece
+                    movingPiece?.zPosition = maxZPosition
+                    movingPiece?.touchStart()
+                }
             }
         }
+
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -204,15 +215,16 @@ class JigsawPuzzle: SKScene {
                 notInPosition = true
             }
         }
-        if !notInPosition {
+        if !notInPosition, !willTransit {
+            willTransit = true
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-            self.run(SKAction.afterDelay(4, runBlock: {
-                if let scene = GetPresent(fileNamed: "DayFourGetPresent") {
+                if let scene = GetPresentPage(fileNamed: "DayFourGetPresent") {
                     scene.day = .dayFour
-                    let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                    self.view?.presentScene(scene, transition: transition)
+                    let explosion = SKSpriteNode(imageNamed: "explosion1")
+                    explosion.position = view!.center
+                    addChild(explosion)
+                    self.explosionAnimation(explosion: explosion, scene: scene)
                 }
-            }))
         }
     }
     

@@ -17,15 +17,21 @@ class PlayASongGame: SKScene {
     var counter = 0
     var sequence = 0
     var titleNode:SKSpriteNode!
+    var canPlay = true
+    
     override func didMove(to view: SKView) {
 
+        if let node = childNode(withName: "DayTwoPresentImage") {
+            node.run(SKAction.fadeOut(withDuration: 3)) {
+                node.zPosition = -2
+                self.setTitle()
+            }
+        }
         for i in 0..<7 {
             let node = self.childNode(withName: "key\(i)") as! SKSpriteNode
             nodeArray.append(node)
 
         }
-        
-        setTitle()
 
     }
     
@@ -35,7 +41,7 @@ class PlayASongGame: SKScene {
         for touch in touches!  {
             let location = touch.location(in: self)
             
-            for node in nodeArray {
+            for node in nodeArray where canPlay {
                 if node.contains(location) {
                     SKTAudio.sharedInstance().playSoundEffect("Piano " + node.name!)
                     node.run(SKAction.animate(with: [SKTexture(imageNamed:node.name! + "Pressed"),SKTexture(imageNamed: node.name! + "Normal")], timePerFrame: 0.5))
@@ -49,20 +55,23 @@ class PlayASongGame: SKScene {
                         counter = 0
                         sequence += 1
                         if sequence <= 2 {
-                          setTitle()
+                            canPlay = false
+                            run(SKAction.afterDelay(1, runBlock: {
+                                self.canPlay = true
+                                SKTAudio.sharedInstance().playSoundEffect("bellJingle")
+                                self.setTitle()
+                            }))
                         } else {
                             let endpoint = childNode(withName: "endpoint")!
                             let snowman = childNode(withName: "snowman")!
                             SKTAudio.sharedInstance().playSoundEffect("snowmanSound")
                             snowman.run(SKAction.move(to: endpoint.position, duration: 2)) {
                                 SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                                self.run(SKAction.afterDelay(4, runBlock: {
-                                    if let scene = GetPresent(fileNamed:"DayTwoGetPresent") {
+                                    if let scene = GetPresentPage(fileNamed:"DayTwoGetPresent"),
+                                        let explosion = self.childNode(withName: "explosion"){
                                         scene.day = .dayTwo
-                                        let transition = SKTransition.moveIn(with: .right, duration: 0.3)
-                                        self.view?.presentScene(scene, transition: transition)
+                                        self.explosionAnimation(explosion: explosion, scene: scene)
                                     }
-                                }))
                             }
                         }
                         
@@ -82,7 +91,7 @@ class PlayASongGame: SKScene {
         titleNode = SKSpriteNode(imageNamed: "sequence\(sequence)")
         titleNode.position = center!.position
         titleNode.name = "titleNode";
-        titleNode.zPosition = 100;
+        titleNode.zPosition = 3;
         self.addChild(titleNode)
     }
 }

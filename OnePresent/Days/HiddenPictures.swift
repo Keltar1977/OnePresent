@@ -9,15 +9,26 @@
 import UIKit
 import SpriteKit
 
-class HiddenPictures: OnePresentPagesScene {
+class HiddenPictures: SKScene {
     var pictureNumber = 1
+    var day:BookDays!
+    var isAnimating = false
 
     
     override func didMove(to view: SKView) {
+        let cameraNode = SKCameraNode()
+        cameraNode.position = position
+        self.addChild(cameraNode)
+        self.camera = cameraNode
+        let panGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGesture)
         for i in 1...3 {
             if let hint = childNode(withName: "hint\(i)") {
                 if pictureNumber == i {
                     hint.isHidden = false
+                    run(SKAction.afterDelay(1, runBlock: { 
+                        self.playHintSound()
+                    }))
                 } else {
                     hint.isHidden = true
                     hint.run(SKAction.fadeOut(withDuration: 2))
@@ -37,7 +48,8 @@ class HiddenPictures: OnePresentPagesScene {
         let nodes = self.nodes(at: location)
         for node in nodes {
             if let name = node.name {
-                if let hiddenObject = HiddenObjects(rawValue:name) {
+                if let hiddenObject = HiddenObjects(rawValue:name), isAnimating == false {
+                    isAnimating = true
                     switch hiddenObject {
                     case .pearl:
                         pearlTouched(pearl: node)
@@ -124,7 +136,7 @@ class HiddenPictures: OnePresentPagesScene {
         guard pictureNumber == 2 else {
             return
         }
-        SKTAudio.sharedInstance().playSoundEffect("bugPressed")
+        SKTAudio.sharedInstance().playBackgroundMusic("bugPressed")
         let path = UIBezierPath()
         let start = childNode(withName: "graph1")!
         path.move(to: start.position)
@@ -135,6 +147,7 @@ class HiddenPictures: OnePresentPagesScene {
         }
         let movePath = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 400)
         bug.run(movePath) {
+            SKTAudio.sharedInstance().pauseBackgroundMusic()
             self.pictureNumber = 3
             self.setHint()
             bug.removeFromParent()
@@ -146,14 +159,12 @@ class HiddenPictures: OnePresentPagesScene {
             return
         }
         fish.run(SKAction.jumpToHeight(100, duration: 2, originalPosition: fish.position))
-        SKAction.repeat(SKAction.afterDelay(0, runBlock: {
-            SKTAudio.sharedInstance().playSoundEffect("fishPressed")
-        }), count: 4)
+        SKTAudio.sharedInstance().playSoundEffect("fishPressed")
         run(SKAction.actionWithEffect(SKTRotateEffect(node: fish, duration: 2, startAngle: 0, endAngle: 13.0))) {
             if let polkaGame = PolkaDotGame(fileNamed:"PolkaDotGame") {
                 SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
                 self.run(SKAction.afterDelay(1, runBlock: {
-                    self.startGame(polkaGame)
+                    self.simpleTransition(polkaGame,startGame: true, direction: .right)
                 }))
                 
             }
@@ -197,7 +208,7 @@ class HiddenPictures: OnePresentPagesScene {
             if let playSong = PlayASongGame(fileNamed:"PlayASongGame") {
                 SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
                 self.run(SKAction.afterDelay(1, runBlock: {
-                    self.startGame(playSong)
+                    self.simpleTransition(playSong,startGame: true, direction: .right)
                 }))
             }
         }
@@ -218,7 +229,7 @@ class HiddenPictures: OnePresentPagesScene {
         guard pictureNumber == 2 else {
             return
         }
-        SKTAudio.sharedInstance().playSoundEffect("flowerSound")
+        SKTAudio.sharedInstance().playBackgroundMusic("flowerSound")
         flower.run(SKAction.animate(with: [SKTexture(image:#imageLiteral(resourceName: "flowerTouchedImage"))],
                                     timePerFrame: 1,
                                     resize: true,
@@ -231,7 +242,9 @@ class HiddenPictures: OnePresentPagesScene {
             let bubbles = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "bubblesImage")))
             bubbles.position = position.position
             bubbles.zPosition = 1
-            bubbles.run(SKAction.fadeIn(withDuration: 2))
+            bubbles.run(SKAction.fadeIn(withDuration: 2)) {
+                SKTAudio.sharedInstance().pauseBackgroundMusic()
+            }
             addChild(bubbles)
         }
     }
@@ -249,7 +262,7 @@ class HiddenPictures: OnePresentPagesScene {
         run(SKAction.afterDelay(1, runBlock: {
             SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
             self.run(SKAction.afterDelay(1, runBlock: {
-                self.startGame(CardGame(size: self.view!.bounds.size))
+                self.simpleTransition(CardGame(size: self.view!.bounds.size),startGame: true, direction: .right)
             }))
         }))
     }
@@ -283,10 +296,14 @@ class HiddenPictures: OnePresentPagesScene {
         }
         SKTAudio.sharedInstance().playSoundEffect("wingsSound")
         wings.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "wingsTouchedImage"))))
+        if let fairDust = childNode(withName: "fairDust") {
+            fairDust.zPosition = 2
+            fairDust.run(SKAction.fadeIn(withDuration: 1))
+        }
         run(SKAction.afterDelay(2, runBlock: {
             SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
             self.run(SKAction.afterDelay(1, runBlock: {
-                self.startGame(JigsawPuzzle(size: self.view!.bounds.size))
+                self.simpleTransition(JigsawPuzzle(size: self.view!.bounds.size),startGame: true, direction: .right)
             }))
         }))
     }
@@ -327,7 +344,7 @@ class HiddenPictures: OnePresentPagesScene {
             if let simonGame = SimonGame(fileNamed:"SimonGame") {
                 SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
                 self.run(SKAction.afterDelay(1, runBlock: {
-                    self.startGame(simonGame)
+                    self.simpleTransition(simonGame,startGame: true, direction: .right)
                 }))
             }
         }
@@ -338,7 +355,7 @@ class HiddenPictures: OnePresentPagesScene {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("starSound")
-        star.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "starTouchedImage"))))
+        star.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "starTouchedImage")), resize: true))
         run(SKAction.afterDelay(1, runBlock: {
             self.pictureNumber = 2
             self.setHint()
@@ -364,12 +381,15 @@ class HiddenPictures: OnePresentPagesScene {
         SKTAudio.sharedInstance().playSoundEffect("cakeSound")
         let circlePath = UIBezierPath(arcCenter: flake.position, radius: 30, startAngle: 0, endAngle: 2 * CGFloat(M_PI), clockwise: true)
         let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
-        flake.run(movePath) {
-            if let dragAndDropGame = DragAndDropGame(fileNamed:"DragAndDropGame") {
-                SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
-                self.run(SKAction.afterDelay(1, runBlock: {
-                    self.startGame(dragAndDropGame)
-                }))
+        let point = CGPoint(x: flake.position.x + sqrt(450), y: flake.position.y + sqrt(450))
+        flake.run(SKAction.move(to: point, duration: 1)) {
+            flake.run(movePath) {
+                if let dragAndDropGame = DragAndDropGame(fileNamed:"DragAndDropGame") {
+                    SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
+                    self.run(SKAction.afterDelay(1, runBlock: {
+                        self.simpleTransition(dragAndDropGame,startGame: true, direction: .right)
+                    }))
+                }
             }
         }
     }
@@ -386,7 +406,7 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func spoonTouched(spoon:SKNode) {
-        guard pictureNumber == 3 else {
+        guard pictureNumber == 2 else {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("spoonSound")
@@ -397,7 +417,7 @@ class HiddenPictures: OnePresentPagesScene {
     }
     
     private func sledTouched(sled:SKNode) {
-        guard pictureNumber == 1 else {
+        guard pictureNumber == 3 else {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("sledSound")
@@ -413,22 +433,22 @@ class HiddenPictures: OnePresentPagesScene {
                                                                         if let mazeGame = MazeGameScene(fileNamed:"MazeGameScene") {
                                                                             SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
                                                                             self.run(SKAction.afterDelay(1, runBlock: {
-                                                                                self.startGame(mazeGame)
+                                                                                self.simpleTransition(mazeGame,startGame: true, direction: .right)
                                                                             }))
                                                                         }
         }
     }
     
     private func setHint() {
-        guard pictureNumber == 2 else {
-            return
-        }
         SKTAudio.sharedInstance().playSoundEffect("hintAppear")
+        isAnimating = false
         for i in 1...3 {
             if let hint = childNode(withName: "hint\(i)") {
                 if pictureNumber == i {
                     hint.isHidden = false
-                    hint.run(SKAction.fadeIn(withDuration: 0.5))
+                    hint.run(SKAction.fadeIn(withDuration: 0.5)) {
+                        self.playHintSound()
+                    }
                 } else {
                     hint.run(SKAction.fadeOut(withDuration: 1))
                 }
@@ -436,13 +456,18 @@ class HiddenPictures: OnePresentPagesScene {
         }
     }
     
-    private func startGame(_ scene: SKScene) {
-        guard pictureNumber == 3 else {
-            return
+    func playHintSound() {
+        SKTAudio.sharedInstance().playNarration(day.rawValue + "NarrationHint\(pictureNumber)")
+    }
+    
+    func handlePan(pinchGesture:UIPinchGestureRecognizer) {
+        let scale:CGFloat!
+        if pinchGesture.velocity >= 0 {
+            scale = 1
+        } else {
+            scale = 0.5
         }
-        scene.scaleMode = .fill
-        SKTAudio.sharedInstance().playSoundEffect("startGame")
-        let transition = SKTransition.moveIn(with: .right, duration: 1)
-        self.view?.presentScene(scene, transition: transition)
+        let zoomInAction = SKAction.scale(to: scale, duration: 0.5)
+        self.camera?.run(zoomInAction)
     }
 }

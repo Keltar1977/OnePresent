@@ -30,6 +30,8 @@ import UIKit
 public class SKTAudio {
   public var backgroundMusicPlayer: AVAudioPlayer?
   public var soundEffectPlayer: AVAudioPlayer?
+  public var narrationEffectPlayer: AVAudioPlayer?
+  public var withNarration = true
 
   public class func sharedInstance() -> SKTAudio {
     return SKTAudioInstance
@@ -43,9 +45,10 @@ public class SKTAudio {
     do {
         backgroundMusicPlayer = try AVAudioPlayer(data: sound.data)
         if let player = backgroundMusicPlayer {
-          player.numberOfLoops = -1
-          player.prepareToPlay()
-          player.play()
+            player.volume = 0.3
+            player.numberOfLoops = -1
+            player.prepareToPlay()
+            player.play()
         }
     } catch {
         print(error)
@@ -76,6 +79,7 @@ public class SKTAudio {
     do {
         soundEffectPlayer = try AVAudioPlayer(data: sound.data)
         if let player = soundEffectPlayer {
+          player.volume = 1.0
           player.numberOfLoops = 0
           player.prepareToPlay()
           player.play()
@@ -87,6 +91,31 @@ public class SKTAudio {
     
     public func pauseSoundEffect() {
         if let player = soundEffectPlayer {
+            if player.isPlaying {
+                player.pause()
+            }
+        }
+    }
+    
+    public func playNarration(_ filename: String) {
+        guard withNarration, let sound = NSDataAsset(name: filename) else {
+            return
+        }
+        do {
+            narrationEffectPlayer = try AVAudioPlayer(data: sound.data)
+            if let player = narrationEffectPlayer {
+                player.volume = 1.0
+                player.numberOfLoops = 0
+                player.prepareToPlay()
+                player.play()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    public func pauseNarration() {
+        if let player = narrationEffectPlayer {
             if player.isPlaying {
                 player.pause()
             }

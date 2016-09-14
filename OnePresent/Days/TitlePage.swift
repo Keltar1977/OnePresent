@@ -9,39 +9,49 @@
 import UIKit
 import SpriteKit
 
-class TitlePage: OnePresentPagesScene {
-
+class TitlePage: SKScene {
+    var snowfall:SKEmitterNode! = nil
+    var btnRight:SKNode! = nil
+    var isLaunch = false
+    
     override func didMove(to view: SKView) {
-        index = 0  
-        let pageContent = SKSpriteNode(imageNamed: "titlePage")
-        pageContent.size = view.frame.size
-        pageContent.position = view.center
-        pageContent.zPosition = 0
-        addChild(pageContent)
-        setUpFooter()
         setupPage()
+        if isLaunch {
+            SKTAudio.sharedInstance().playNarration("titlePageNarration")
+        }
         SKTAudio.sharedInstance().playBackgroundMusic("Title Page Song")
-    }
+    }     
     
     func setupPage() {
-        startSnowfall()
-        dancingPresent.name = "dancingPresent"
-        dancingPresent.size = CGSize(width: 0.3 * self.size.height, height: 0.3 * self.size.height)
-        dancingPresent.position = CGPoint(x:(3 * self.size.width)/4 ,y:(3 * self.size.height)/4)
-        dancingPresent.zPosition = 1
-        let rotateRight = SKAction.rotate(byAngle: 0.2, duration: 0.2)
-        let rotateLeft = SKAction.rotate(byAngle: -0.4, duration: 0.2)
-        dancingPresent.run(SKAction.repeatForever(SKAction.sequence([rotateRight,rotateLeft,rotateRight])))
-        addChild(dancingPresent)
+        snowfall = startSnowfall(emitterNode: snowfall)
+        if let node = childNode(withName: "rightCane") {
+            btnRight = node
+        }
+        if let dancingPresent = childNode(withName: "dancingPresent") {
+            let rotateRight = SKAction.rotate(byAngle: 0.2, duration: 0.2)
+            let rotateLeft = SKAction.rotate(byAngle: -0.4, duration: 0.2)
+            dancingPresent.run(SKAction.repeatForever(SKAction.sequence([rotateRight,rotateLeft,rotateRight])))
+        }
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
         for touch in touches!  {
             let location = touch.location(in: self)
-            if btnRight.contains(location) {
-                goToScene(IndexPageScene(fileNamed:"IndexPageScene")!,transition: .curlUp)
+            if (btnRight != nil), btnRight.contains(location) {
+                if let scene = IndexPageScene(fileNamed:"IndexPageScene") {
+                    scene.scaleMode = .fill
+                    SKTAudio.sharedInstance().playSoundEffect("pageFlip")
+                    let transition = SKTransition.moveIn(with: .right, duration: 1)
+                    self.view?.presentScene(scene, transition: transition)
+                }
+
             }
         }
+    }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseNarration()
     }
 
 }

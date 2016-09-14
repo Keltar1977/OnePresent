@@ -11,22 +11,18 @@ import SpriteKit
 
 
 class OnePresentViewController: UIViewController {
-
-    
+ 
     override func viewDidLoad() {
-
         super.viewDidLoad()
-        let scene = TitlePage(size: view.bounds.size)
-        
-//        let scene  = DrawingPage(fileNamed:"DrawingPage")!
-        let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
-        scene.scaleMode = .aspectFill
-        skView.presentScene(scene)
-//        }
-    
+        if let scene = TitlePage(fileNamed: "TitlePage") {
+            let skView = self.view as! SKView
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            skView.ignoresSiblingOrder = true
+            scene.scaleMode = .fill
+            scene.isLaunch = true
+            skView.presentScene(scene)
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         let value = UIInterfaceOrientation.portrait.rawValue
@@ -37,8 +33,8 @@ class OnePresentViewController: UIViewController {
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             let skView = self.view as! SKView
-            if let scene = skView.scene as? OnePresentPagesScene, scene.isComeBackPage == true {
-                scene.startSnowfall()
+            if let scene = skView.scene as? ComeBackPage {
+                scene.snowfall = scene.startSnowfall(emitterNode: scene.snowfall)
             }
         }
     }
