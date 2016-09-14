@@ -42,6 +42,7 @@ class GetPresentPage: SKScene {
                 return
             }
             guard day != .dayFive else {
+                SKTAudio.sharedInstance().playSoundEffect("markerSound")
                 ref.move(to: location)
                 return
             }
@@ -173,7 +174,7 @@ class GetPresentPage: SKScene {
         ref.addLine(to: locationInScene)
         line.path = ref
         line.lineWidth = 20
-        line.strokeColor = UIColor.blue
+        line.strokeColor = UIColor(red: 25/255, green: 208/255, blue: 247/255, alpha: 1)
         line.name = "line"
         line.zPosition = 2.5
         self.addChild(line)

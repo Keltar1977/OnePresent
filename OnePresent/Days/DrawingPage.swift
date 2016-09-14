@@ -65,6 +65,7 @@ class DrawingPage: OnePresentPagesScene {
                     goToScene(prevPage, transition: .curlUp, fromIndexPage: false)
                 }
             } else {
+                SKTAudio.sharedInstance().playSoundEffect("markerSound")
                 ref.move(to: location)
             }
         }

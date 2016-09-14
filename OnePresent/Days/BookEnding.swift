@@ -16,14 +16,17 @@ class BookEnding: OnePresentPagesScene {
             let texture = SKTexture(imageNamed: "BookEnding \(bookChapter.pageIndex)")
             pageContent.run(SKAction.setTexture(texture))
         }
-        if bookChapter.pageIndex == 1 {
-            SKTAudio.sharedInstance().playNarration("BookEndingNarration1")
-        } else if bookChapter.pageIndex == 3 {
-            SKTAudio.sharedInstance().playNarration("BookEndingNarration2")
-            run(SKAction.afterDelay(2, runBlock: {
+        run(SKAction.afterDelay(1, runBlock: {
+            if self.bookChapter.pageIndex < 3 {
+                SKTAudio.sharedInstance().playNarration("BookEndingNarration\(self.bookChapter.pageIndex)")
+            } else if self.bookChapter.pageIndex == 3 {
+                SKTAudio.sharedInstance().playBackgroundMusic("Title Page Song")
                 SKTAudio.sharedInstance().playNarration("BookEndingNarration3")
-            }))
-        }
+                self.run(SKAction.afterDelay(3, runBlock: {
+                    SKTAudio.sharedInstance().playNarration("BookEndingNarration4")
+                }))
+            }
+        }))
         setUpFooter()
     }
     
@@ -47,5 +50,9 @@ class BookEnding: OnePresentPagesScene {
                 }
             }
         }
+    }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseNarration()
     }
 }

@@ -9,7 +9,6 @@
 import UIKit
 import SpriteKit
 
-@available(iOS 9.0, *)
 class PolkaDotGame: SKScene {
 
     var dotArray  = [SKSpriteNode]()
@@ -17,11 +16,11 @@ class PolkaDotGame: SKScene {
 
     override func didMove(to view: SKView) {
         if let node = childNode(withName: "DayOnePresentImage") {
-            run(SKAction.afterDelay(2, runBlock: { 
+            node.run(SKAction.fadeOut(withDuration: 3)) {
                 node.zPosition = -2
-            }))
+                self.createNewDot()
+            }
         }
-        createNewDot()
     }
     
     func createNewDot() {
@@ -80,12 +79,11 @@ class PolkaDotGame: SKScene {
                         counter += 1
                         if counter == 15 {
                             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                            self.run(SKAction.afterDelay(4, runBlock: {
-                                if let scene = GetPresentPage(fileNamed:"DayOneGetPresent") {
-                                    scene.day = .dayOne
-                                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
-                                }
-                            }))
+                            if let scene = GetPresentPage(fileNamed:"DayOneGetPresent"),
+                                let explosion = childNode(withName: "explosion") {
+                                scene.day = .dayOne
+                                self.explosionAnimation(explosion: explosion, scene:scene)
+                            }
                         } else {
                             createNewDot()
                         }

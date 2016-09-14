@@ -23,7 +23,9 @@ class ComeBackPage: SKScene {
         SKTAudio.sharedInstance().playNarration(day.rawValue + "NarrationComeBack")
         btnLeft = childNode(withName: "leftCane")
         btnRight = childNode(withName: "rightCane")
-        SKTAudio.sharedInstance().playBackgroundMusic("windBlow")
+        if day != .daySeven {
+            SKTAudio.sharedInstance().playBackgroundMusic("windBlow")
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {

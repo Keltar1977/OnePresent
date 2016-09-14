@@ -49,5 +49,9 @@ class TitlePage: SKScene {
             }
         }
     }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseNarration()
+    }
 
 }

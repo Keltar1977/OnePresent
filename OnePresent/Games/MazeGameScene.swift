@@ -6,20 +6,22 @@ struct Collision {
     static let Ball: UInt32 = 0x1 << 0       // bin(001) = dec(1)
     static let BlackHole: UInt32 = 0x1 << 1  // bin(010) = dec(2)
     static let FinishHole: UInt32 = 0x1 << 2 // bin(100) = dec(4)
+    
 }
 
 class MazeGameScene: SKScene {
     var sled: SKSpriteNode!
     var nameArray:[String] = []
+    var lastTouch: CGPoint? = nil
     
     // MARK: - SpriteKit Methods
     
     override func didMove(to view: SKView) {
 
         if let node = childNode(withName: "DaySevenPresentImage") {
-            run(SKAction.afterDelay(2, runBlock: {
+            node.run(SKAction.fadeOut(withDuration: 3)) {
                 node.zPosition = -2
-            }))
+            }
         }
         physicsWorld.contactDelegate = self
         
@@ -35,6 +37,8 @@ class MazeGameScene: SKScene {
         sled.physicsBody?.collisionBitMask = Collision.Ball
         sled.physicsBody?.contactTestBitMask = Collision.BlackHole | Collision.FinishHole
         sled.physicsBody?.affectedByGravity = false
+        sled.physicsBody?.linearDamping = 1.0
+        sled.physicsBody?.angularDamping = 1.0
         addChild(sled)
         makePath("Wall")
         nameArray.append("Wall")
@@ -60,36 +64,43 @@ class MazeGameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let location = touch.location(in: self)
-            moveSled(location: location)
+            let touchLocation = touch.location(in: self)
+            lastTouch = touchLocation
         }
+
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+    
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent!) {
         if let touch = touches.first {
-            let location = touch.location(in: self)
-            moveSled(location: location)
+            let touchLocation = touch.location(in: self)
+            lastTouch = touchLocation
         }
+        
     }
     
-    func moveSled(location:CGPoint) {
-        for name in nameArray {
-            if let node = childNode(withName:name), node.contains(location) {
-                return
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent!) {
+        lastTouch = nil
+    }
+    
+    override func update(_ currentTime: CFTimeInterval) {
+        /* Called before each frame is rendered */
+        if let touch = lastTouch {
+            if (SKTAudio.sharedInstance().backgroundMusicPlayer == nil) || !SKTAudio.sharedInstance().soundEffectPlayer!.isPlaying {
+                SKTAudio.sharedInstance().playSoundEffect("toboggan")
             }
-        }
-        if (SKTAudio.sharedInstance().soundEffectPlayer == nil) || !SKTAudio.sharedInstance().soundEffectPlayer!.isPlaying {
-            SKTAudio.sharedInstance().playSoundEffect("toboggan")
-        }
-        sled.run(SKAction.move(to: location, duration: 0))
+            let impulseVector = CGVector(dx: touch.x - sled.position.x, dy: touch.y - sled.position.y)
+            // If myShip starts moving too fast or too slow, you can multiply impulseVector by a constant or clamp its range
+            sled.physicsBody?.applyImpulse(impulseVector)
+        } else if !sled.physicsBody!.isResting {
+            let impulseVector = CGVector(dx: sled.physicsBody!.velocity.dx * -0.5, dy: sled.physicsBody!.velocity.dy * -0.5)
+            sled.physicsBody?.applyImpulse(impulseVector)
     }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        run(SKAction.afterDelay(1, runBlock: {
-            SKTAudio.sharedInstance().playSoundEffect("Thud into snow")
-        }))
+
     }
-    
+
     
     func centerSled() {
         SKTAudio.sharedInstance().playSoundEffect("Cheek boing")
@@ -102,13 +113,11 @@ class MazeGameScene: SKScene {
     
     func alertWon() {
         SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-        self.run(SKAction.afterDelay(4, runBlock: {
-            if let scene = GetPresentPage(fileNamed: "DaySevenGetPresent") {
+            if let scene = GetPresentPage(fileNamed: "DaySevenGetPresent"),
+                let explosion = childNode(withName: "explosion"){
                 scene.day = .daySeven
-                self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                self.explosionAnimation(explosion: explosion, scene: scene)
             }
-        }))
-
     }
 
 }
@@ -132,6 +141,8 @@ extension MazeGameScene: SKPhysicsContactDelegate {
             
         } else if (contact.bodyA.categoryBitMask == Collision.FinishHole && contact.bodyB.categoryBitMask == Collision.Ball) || (contact.bodyB.categoryBitMask == Collision.FinishHole && contact.bodyA.categoryBitMask == Collision.Ball) {
             alertWon()
+        } else if contact.bodyA.categoryBitMask == Collision.Ball || contact.bodyB.categoryBitMask == Collision.Ball{
+            SKTAudio.sharedInstance().playSoundEffect("Thud into snow")
         }
     }
 }

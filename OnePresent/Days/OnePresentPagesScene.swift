@@ -21,7 +21,10 @@ class OnePresentPagesScene: SKScene {
         if bookChapter.fromIndexPage {
             SKTAudio.sharedInstance().playSoundEffect("dayPageAppear")
         }
-        SKTAudio.sharedInstance().playNarration(bookChapter.day.rawValue + "NarrationPage\(bookChapter.pageIndex)" )
+        run(SKAction.afterDelay(1, runBlock: {
+            let narration = self.bookChapter.day.rawValue + "NarrationPage\(self.bookChapter.pageIndex)"
+            SKTAudio.sharedInstance().playNarration(narration)
+        }))
         setUpFooter()
     }
     
@@ -91,6 +94,7 @@ class OnePresentPagesScene: SKScene {
         if readAloneButton.contains(location) {
             narration = true
         }
+        SKTAudio.sharedInstance().withNarration = narration
         if let nextScene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
             nextScene.bookChapter = self.bookChapter
             nextScene.bookChapter.pageIndex = self.bookChapter.pageIndex + 1
@@ -98,6 +102,10 @@ class OnePresentPagesScene: SKScene {
             SKTAudio.sharedInstance().playSoundEffect("dayButtonPressed")
             simpleTransition(nextScene, startGame: false, direction: .right)
         }
+    }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseNarration()
     }
     
 
@@ -145,5 +153,17 @@ extension SKScene {
         }
         let transition = SKTransition.moveIn(with: direction, duration: 1)
         self.view?.presentScene(scene, transition: transition)
+    }
+    
+    func explosionAnimation(explosion:SKNode ,scene:SKScene) {
+        explosion.zPosition = 100
+        var textures:[SKTexture] = []
+        for i in 1...8 {
+            let texture = SKTexture(imageNamed: "explosion\(i)")
+            textures.append(texture)
+        }
+        explosion.run(SKAction.animate(with: textures, timePerFrame: 0.2, resize: true, restore: false)) {
+            self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+        }
     }
 }

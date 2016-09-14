@@ -12,6 +12,7 @@ import SpriteKit
 class HiddenPictures: SKScene {
     var pictureNumber = 1
     var day:BookDays!
+    var isAnimating = false
 
     
     override func didMove(to view: SKView) {
@@ -25,7 +26,9 @@ class HiddenPictures: SKScene {
             if let hint = childNode(withName: "hint\(i)") {
                 if pictureNumber == i {
                     hint.isHidden = false
-                    playHintSound()
+                    run(SKAction.afterDelay(1, runBlock: { 
+                        self.playHintSound()
+                    }))
                 } else {
                     hint.isHidden = true
                     hint.run(SKAction.fadeOut(withDuration: 2))
@@ -45,7 +48,8 @@ class HiddenPictures: SKScene {
         let nodes = self.nodes(at: location)
         for node in nodes {
             if let name = node.name {
-                if let hiddenObject = HiddenObjects(rawValue:name) {
+                if let hiddenObject = HiddenObjects(rawValue:name), isAnimating == false {
+                    isAnimating = true
                     switch hiddenObject {
                     case .pearl:
                         pearlTouched(pearl: node)
@@ -155,9 +159,8 @@ class HiddenPictures: SKScene {
             return
         }
         fish.run(SKAction.jumpToHeight(100, duration: 2, originalPosition: fish.position))
-        SKTAudio.sharedInstance().playBackgroundMusic("fishPressed")
+        SKTAudio.sharedInstance().playSoundEffect("fishPressed")
         run(SKAction.actionWithEffect(SKTRotateEffect(node: fish, duration: 2, startAngle: 0, endAngle: 13.0))) {
-            SKTAudio.sharedInstance().pauseBackgroundMusic()
             if let polkaGame = PolkaDotGame(fileNamed:"PolkaDotGame") {
                 SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
                 self.run(SKAction.afterDelay(1, runBlock: {
@@ -292,7 +295,11 @@ class HiddenPictures: SKScene {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("wingsSound")
-        wings.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "wingsTouchedImage")), resize: true))
+        wings.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "wingsTouchedImage"))))
+        if let fairDust = childNode(withName: "fairDust") {
+            fairDust.zPosition = 2
+            fairDust.run(SKAction.fadeIn(withDuration: 1))
+        }
         run(SKAction.afterDelay(2, runBlock: {
             SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
             self.run(SKAction.afterDelay(1, runBlock: {
@@ -348,7 +355,7 @@ class HiddenPictures: SKScene {
             return
         }
         SKTAudio.sharedInstance().playSoundEffect("starSound")
-        star.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "starTouchedImage"))))
+        star.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "starTouchedImage")), resize: true))
         run(SKAction.afterDelay(1, runBlock: {
             self.pictureNumber = 2
             self.setHint()
@@ -374,12 +381,15 @@ class HiddenPictures: SKScene {
         SKTAudio.sharedInstance().playSoundEffect("cakeSound")
         let circlePath = UIBezierPath(arcCenter: flake.position, radius: 30, startAngle: 0, endAngle: 2 * CGFloat(M_PI), clockwise: true)
         let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
-        flake.run(movePath) {
-            if let dragAndDropGame = DragAndDropGame(fileNamed:"DragAndDropGame") {
-                SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
-                self.run(SKAction.afterDelay(1, runBlock: {
-                    self.simpleTransition(dragAndDropGame,startGame: true, direction: .right)
-                }))
+        let point = CGPoint(x: flake.position.x + sqrt(450), y: flake.position.y + sqrt(450))
+        flake.run(SKAction.move(to: point, duration: 1)) {
+            flake.run(movePath) {
+                if let dragAndDropGame = DragAndDropGame(fileNamed:"DragAndDropGame") {
+                    SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
+                    self.run(SKAction.afterDelay(1, runBlock: {
+                        self.simpleTransition(dragAndDropGame,startGame: true, direction: .right)
+                    }))
+                }
             }
         }
     }
@@ -431,6 +441,7 @@ class HiddenPictures: SKScene {
     
     private func setHint() {
         SKTAudio.sharedInstance().playSoundEffect("hintAppear")
+        isAnimating = false
         for i in 1...3 {
             if let hint = childNode(withName: "hint\(i)") {
                 if pictureNumber == i {

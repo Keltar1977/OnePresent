@@ -26,14 +26,15 @@ class DragAndDropGame: SKScene {
     
     override func didMove(to view: SKView) {
         if let node = childNode(withName: "DaySixPresentImage") {
-            run(SKAction.afterDelay(2, runBlock: {
+            node.run(SKAction.fadeOut(withDuration: 3)) {
                 node.zPosition = -2
-            }))
+            }
         }
         let pointA = self.childNode(withName: "pointA")
         let pointB = self.childNode(withName: "pointB")
         let pointC = self.childNode(withName: "pointC")
         let pointD = self.childNode(withName: "pointD")
+        SKTAudio.sharedInstance().playBackgroundMusic("cocoaGameBackground")
         cupPath = UIBezierPath()
         cupPath.move(to: pointA!.position)
         cupPath.addQuadCurve(to: pointC!.position, controlPoint: pointB!.position)
@@ -126,12 +127,11 @@ class DragAndDropGame: SKScene {
             repeatCounter += 1
             if repeatCounter == 3 {
                 SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                self.run(SKAction.afterDelay(4, runBlock: {
-                    if let scene = GetPresentPage(fileNamed: "DaySixGetPresent") {
+                    if let scene = GetPresentPage(fileNamed: "DaySixGetPresent"),
+                        let explosion = childNode(withName: "explosion"){
                         scene.day = .daySix
-                        self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                        self.explosionAnimation(explosion: explosion, scene: scene)
                     }
-                }))
             } else {
                 run(SKAction.afterDelay(0.5, runBlock: {
                     SKTAudio.sharedInstance().playSoundEffect("bellJingle")
@@ -172,6 +172,10 @@ class DragAndDropGame: SKScene {
         if inFrame {
             putNodeBack(iteration + 1)
         }
+    }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseBackgroundMusic()
     }
 
 }

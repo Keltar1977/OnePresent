@@ -19,13 +19,13 @@ class SimonGame: SKScene {
     var counter = 0
     var updating = false
     override func didMove(to view: SKView) {
-        if let node = childNode(withName: "DayFivePresentImage") {
-            run(SKAction.afterDelay(2, runBlock: {
-                node.zPosition = -2
-            }))
-        }
         nodeArray = [childNode(withName: "blue")!,childNode(withName: "yellow")!,childNode(withName: "green")!,childNode(withName: "purple")!]
-        updateSequance()
+        if let node = childNode(withName: "DayFivePresentImage") {
+            node.run(SKAction.fadeOut(withDuration: 3)) {
+                self.updateSequance()
+                node.zPosition = -2
+            }
+        }
     }
     
     
@@ -88,12 +88,11 @@ class SimonGame: SKScene {
         lengthOfSequance += 1
         guard lengthOfSequance != 6 else {
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-            self.run(SKAction.afterDelay(4, runBlock: {
-                if let scene = GetPresentPage(fileNamed: "DayFiveGetPresent") {
+                if let scene = GetPresentPage(fileNamed: "DayFiveGetPresent"),
+                    let explosion = childNode(withName: "explosion"){
                     scene.day = .dayFive
-                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                    self.explosionAnimation(explosion: explosion, scene: scene)
                 }
-            }))
             return
         }
         generateSequance()

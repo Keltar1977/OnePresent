@@ -31,7 +31,7 @@ public class SKTAudio {
   public var backgroundMusicPlayer: AVAudioPlayer?
   public var soundEffectPlayer: AVAudioPlayer?
   public var narrationEffectPlayer: AVAudioPlayer?
-    
+  public var withNarration = true
 
   public class func sharedInstance() -> SKTAudio {
     return SKTAudioInstance
@@ -45,7 +45,7 @@ public class SKTAudio {
     do {
         backgroundMusicPlayer = try AVAudioPlayer(data: sound.data)
         if let player = backgroundMusicPlayer {
-            player.volume = 0.5
+            player.volume = 0.3
             player.numberOfLoops = -1
             player.prepareToPlay()
             player.play()
@@ -96,9 +96,9 @@ public class SKTAudio {
             }
         }
     }
+    
     public func playNarration(_ filename: String) {
-        guard let sound = NSDataAsset(name: filename) else {
-            print("Could not find file: \(filename)")
+        guard withNarration, let sound = NSDataAsset(name: filename) else {
             return
         }
         do {
@@ -111,6 +111,14 @@ public class SKTAudio {
             }
         } catch {
             print(error)
+        }
+    }
+    
+    public func pauseNarration() {
+        if let player = narrationEffectPlayer {
+            if player.isPlaying {
+                player.pause()
+            }
         }
     }
     

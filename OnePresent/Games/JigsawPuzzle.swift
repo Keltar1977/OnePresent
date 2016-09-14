@@ -19,6 +19,7 @@ class JigsawPuzzle: SKScene {
     var movingPiece: Piece?
     var maxZPosition: CGFloat = Layer.Tiles
     var imageSize: CGSize!
+    var willTransit = false
 
      override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -33,12 +34,12 @@ class JigsawPuzzle: SKScene {
         present.position = view.center
         present.zPosition = 4
         addChild(present)
-        run(SKAction.afterDelay(2, runBlock: {
+        present.run(SKAction.fadeOut(withDuration: 3)) {
             present.zPosition = -2
             self.imageSize = CGSize(width: 400, height: 400)
             self.setBorder()
             self.startNewPuzzleGameLevel()
-        }))
+        }
     }
 
     func startNewPuzzleGameLevel() {
@@ -127,30 +128,33 @@ class JigsawPuzzle: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let loc = touch.location( in: border!)
-            let nodes = border!.nodes(at: loc)
-            var piecess = [Piece]()
-            for node in nodes where node.name == pieceName {
-                if node.isKind(of:Piece.self) {
-                    piecess.append((node as? Piece)!)
+        if let puzzleBorder = border {
+            for touch in touches {
+                let loc = touch.location( in: puzzleBorder)
+                let nodes = puzzleBorder.nodes(at: loc)
+                var piecess = [Piece]()
+                for node in nodes where node.name == pieceName {
+                    if node.isKind(of:Piece.self) {
+                        piecess.append((node as? Piece)!)
+                    }
                 }
-            }
-            var minElem = CGFloat.leastNormalMagnitude
-            var index: Int = 0
-            for piece in piecess {
-                if piece.zPosition > minElem {
-                    minElem += piece.zPosition
-                    index = piecess.index(of: piece)!
+                var minElem = CGFloat.leastNormalMagnitude
+                var index: Int = 0
+                for piece in piecess {
+                    if piece.zPosition > minElem {
+                        minElem += piece.zPosition
+                        index = piecess.index(of: piece)!
+                    }
                 }
-            }
-            if piecess.count > 0 {
-                maxZPosition += 1
-                movingPiece = piecess[index] as Piece
-                movingPiece?.zPosition = maxZPosition
-                movingPiece?.touchStart()
+                if piecess.count > 0 {
+                    maxZPosition += 1
+                    movingPiece = piecess[index] as Piece
+                    movingPiece?.zPosition = maxZPosition
+                    movingPiece?.touchStart()
+                }
             }
         }
+
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -211,14 +215,16 @@ class JigsawPuzzle: SKScene {
                 notInPosition = true
             }
         }
-        if !notInPosition {
+        if !notInPosition, !willTransit {
+            willTransit = true
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-            self.run(SKAction.afterDelay(4, runBlock: {
                 if let scene = GetPresentPage(fileNamed: "DayFourGetPresent") {
                     scene.day = .dayFour
-                    self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                    let explosion = SKSpriteNode(imageNamed: "explosion1")
+                    explosion.position = view!.center
+                    addChild(explosion)
+                    self.explosionAnimation(explosion: explosion, scene: scene)
                 }
-            }))
         }
     }
     

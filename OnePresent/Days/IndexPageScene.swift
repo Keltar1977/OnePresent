@@ -20,11 +20,10 @@ class IndexPageScene: SKScene {
         let userdefaults = UserDefaults.standard
         
         for  day in BookDays.allValues {
-            if let number = self.childNode(withName: day.rawValue + "Number"), userdefaults.bool(forKey: day.rawValue + "Number") {
-                let glowLayer = SKSpriteNode(imageNamed: "presentNumberGlowing")
-                glowLayer.position = number.position
-                glowLayer.zPosition = 2
-                addChild(glowLayer)
+            if userdefaults.bool(forKey: day.rawValue + "Number") {
+                if let glowLayer = childNode(withName: day.rawValue + "Glow") {
+                   glowLayer.zPosition = 1
+                }
             }
         }
         

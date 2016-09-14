@@ -26,9 +26,9 @@ class CardGame: SKScene {
         present.position = view.center
         present.zPosition = 4
         addChild(present)
-        run(SKAction.afterDelay(2, runBlock: { 
+        present.run(SKAction.fadeOut(withDuration: 3)) {
             present.zPosition = -2
-        }))
+        }
         for i in 0 ..< 12 {
             let k = i%4
             let j = i/4
@@ -73,13 +73,13 @@ class CardGame: SKScene {
                     self.selectedCards.removeAll()
                     if self.counter == 6 {
                         SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                        self.run(SKAction.afterDelay(4, runBlock: {
                             if let scene = GetPresentPage(fileNamed: "DayThreeGetPresent") {
                                 scene.day = .dayThree
-                                self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                                let explosion = SKSpriteNode(imageNamed: "explosion1")
+                                explosion.position = self.view!.center
+                                self.addChild(explosion)
+                                self.explosionAnimation(explosion: explosion, scene: scene)
                             }
-                        }))
-                        
                     }
                     self.isUserInteractionEnabled = true
                     })

@@ -22,17 +22,16 @@ class PlayASongGame: SKScene {
     override func didMove(to view: SKView) {
 
         if let node = childNode(withName: "DayTwoPresentImage") {
-            run(SKAction.afterDelay(2, runBlock: {
+            node.run(SKAction.fadeOut(withDuration: 3)) {
                 node.zPosition = -2
-            }))
+                self.setTitle()
+            }
         }
         for i in 0..<7 {
             let node = self.childNode(withName: "key\(i)") as! SKSpriteNode
             nodeArray.append(node)
 
         }
-        
-        setTitle()
 
     }
     
@@ -68,12 +67,11 @@ class PlayASongGame: SKScene {
                             SKTAudio.sharedInstance().playSoundEffect("snowmanSound")
                             snowman.run(SKAction.move(to: endpoint.position, duration: 2)) {
                                 SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                                self.run(SKAction.afterDelay(4, runBlock: {
-                                    if let scene = GetPresentPage(fileNamed:"DayTwoGetPresent") {
+                                    if let scene = GetPresentPage(fileNamed:"DayTwoGetPresent"),
+                                        let explosion = self.childNode(withName: "explosion"){
                                         scene.day = .dayTwo
-                                        self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
+                                        self.explosionAnimation(explosion: explosion, scene: scene)
                                     }
-                                }))
                             }
                         }
                         
