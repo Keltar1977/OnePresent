@@ -6,7 +6,8 @@
   "data" : [
     {
       "idiom" : "universal",
-      "filename" : "snowman high 5.mp3"
+      "filename" : "Snowman high 5 final.mp3",
+      "universal-type-identifier" : "public.mp3"
     }
   ]
 }

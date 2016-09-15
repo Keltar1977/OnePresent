@@ -287,6 +287,15 @@ extension Collection where Index == Int {
     }
 }
 
+extension CGVector {
+    func speed() -> CGFloat {
+        return sqrt(dx*dx+dy*dy)
+    }
+    func objectAngle() -> CGFloat {
+        return atan2(dy, dx)
+    }
+}
+
 extension MutableCollection where Index == Int, IndexDistance == Int {
     /// Shuffle the elements of `self` in-place.
     mutating func shuffleInPlace() {

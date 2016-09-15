@@ -86,7 +86,7 @@ class SimonGame: SKScene {
     
     func updateSequance() {
         lengthOfSequance += 1
-        guard lengthOfSequance != 6 else {
+        guard lengthOfSequance != 7 else {
             SKTAudio.sharedInstance().playSoundEffect("gameVictory")
                 if let scene = GetPresentPage(fileNamed: "DayFiveGetPresent"),
                     let explosion = childNode(withName: "explosion"){

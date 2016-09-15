@@ -25,7 +25,7 @@ class MazeGameScene: SKScene {
         }
         physicsWorld.contactDelegate = self
         
-        sled = SKSpriteNode(imageNamed: "redDot")
+        sled = SKSpriteNode(imageNamed: "sled")
         let startPoint = self.childNode(withName: "StartPoint")
         sled.position = (startPoint?.position)!
         sled.size = CGSize(width: sled.frame.width, height: sled.frame.height)
@@ -98,7 +98,23 @@ class MazeGameScene: SKScene {
             let impulseVector = CGVector(dx: sled.physicsBody!.velocity.dx * -0.5, dy: sled.physicsBody!.velocity.dy * -0.5)
             sled.physicsBody?.applyImpulse(impulseVector)
     }
+    }
+    
+    override func didSimulatePhysics() {
+        if let body = sled.physicsBody {
+            if (body.velocity.speed() > 0.01) {
 
+                let newAngle = body.velocity.objectAngle() - CGFloat(M_PI)
+                switch abs(newAngle) {
+                case 2...5:
+                   sled.yScale = -1
+                default:
+                    sled.yScale = 1
+                }
+                sled.zRotation = newAngle
+                print(sled.zRotation)
+            }
+        }
     }
 
     

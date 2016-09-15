@@ -17,6 +17,7 @@ class PolkaDotGame: SKScene {
     override func didMove(to view: SKView) {
         if let node = childNode(withName: "DayOnePresentImage") {
             node.run(SKAction.fadeOut(withDuration: 3)) {
+                SKTAudio.sharedInstance().playBackgroundMusic("polkadotBackground")
                 node.zPosition = -2
                 self.createNewDot()
             }
@@ -93,6 +94,10 @@ class PolkaDotGame: SKScene {
                 }
             }
         }
+    }
+    
+    override func willMove(from view: SKView) {
+        SKTAudio.sharedInstance().pauseBackgroundMusic()
     }
     
 }

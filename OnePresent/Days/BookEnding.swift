@@ -20,7 +20,7 @@ class BookEnding: OnePresentPagesScene {
             if self.bookChapter.pageIndex < 3 {
                 SKTAudio.sharedInstance().playNarration("BookEndingNarration\(self.bookChapter.pageIndex)")
             } else if self.bookChapter.pageIndex == 3 {
-                SKTAudio.sharedInstance().playBackgroundMusic("Title Page Song")
+                SKTAudio.sharedInstance().playBackgroundMusic("endingSong")
                 SKTAudio.sharedInstance().playNarration("BookEndingNarration3")
                 self.run(SKAction.afterDelay(3, runBlock: {
                     SKTAudio.sharedInstance().playNarration("BookEndingNarration4")
