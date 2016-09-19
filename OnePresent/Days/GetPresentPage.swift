@@ -92,18 +92,15 @@ class GetPresentPage: SKScene {
         if let present = childNode(withName: "present") as? SKSpriteNode {
             
             
-            if wrappCounter == 4 {
-                present.run(SKAction.setTexture(SKTexture(imageNamed:"wrappingBackground")))
-                present.run(SKAction.afterDelay(1, runBlock: {
+            if wrappCounter == 3 {
+//                present.run(SKAction.setTexture(SKTexture(imageNamed:"wrappingBackground")))
+                present.run(SKAction.afterDelay(2, runBlock: {
                     present.zPosition = 0
                     SKTAudio.sharedInstance().playNarration(self.day.rawValue + "Present")
                 }))
-            } else {
-                present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter + 1)")))
-                SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter)")
             }
-            
-            
+            present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter + 1)")))
+            SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter)")  
         }
     }
     
@@ -119,23 +116,21 @@ class GetPresentPage: SKScene {
     }
     
     private func leftCaneTouched() {
-        if let nextScene = HiddenPictures(fileNamed:day.rawValue + "HiddenPictures") {
-            goToScene(nextScene,transition: .curlUp, fromIndexPage: false)
+        if let nextPage = HiddenPictures(fileNamed:day.rawValue + "HiddenPictures") {
+            nextPage.day = day
+            goToScene(nextPage,transition: .curlUp, fromIndexPage: false)
         }
     }
     
     private func yoyoTouched(yoyo:SKNode) {
-        let glow = childNode(withName: "glowYoyo")!
         yoyo.name = "yoyoToched"
         yoyo.run(SKAction.animate(with: [SKTexture(image: #imageLiteral(resourceName: "yoyoTouchedImage"))], timePerFrame: 1, resize: true, restore: true)) {
             SKTAudio.sharedInstance().playSoundEffect("yoyoUp")
             yoyo.name = "yoyo"
             yoyo.run(SKAction.moveTo(y: yoyo.position.y + yoyo.frame.size.height/1.3, duration: 0))
-            glow.run(SKAction.moveTo(y: glow.position.y + yoyo.frame.size.height * 1.54, duration: 0))
         }
         SKTAudio.sharedInstance().playSoundEffect("yoyoDown")
         yoyo.run(SKAction.moveTo(y: yoyo.position.y - yoyo.frame.size.height/1.3, duration: 0))
-        glow.run(SKAction.moveTo(y: glow.position.y - yoyo.frame.size.height * 1.5, duration: 0))
     }
     
     private func steamTouched(steam:SKNode) {

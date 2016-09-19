@@ -31,7 +31,7 @@ class BookEnding: OnePresentPagesScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
-        for touch in touches!  {
+        if let  touch = touches?.first  {
             let location = touch.location(in: self)
             if bookChapter.pageIndex == 1,
                 btnLeft.contains(location),

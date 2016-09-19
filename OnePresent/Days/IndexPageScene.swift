@@ -22,7 +22,7 @@ class IndexPageScene: SKScene {
         for  day in BookDays.allValues {
             if userdefaults.bool(forKey: day.rawValue + "Number") {
                 if let glowLayer = childNode(withName: day.rawValue + "Glow") {
-                   glowLayer.zPosition = 1
+                   glowLayer.zPosition = 3
                 }
             }
         }
