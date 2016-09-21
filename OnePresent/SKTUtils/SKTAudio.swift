@@ -32,6 +32,7 @@ public class SKTAudio {
   public var soundEffectPlayer: AVAudioPlayer?
   public var narrationEffectPlayer: AVAudioPlayer?
   public var withNarration = true
+  public var daySeven = false
 
   public class func sharedInstance() -> SKTAudio {
     return SKTAudioInstance
@@ -98,7 +99,7 @@ public class SKTAudio {
     }
     
     public func playNarration(_ filename: String) {
-        guard withNarration, let sound = NSDataAsset(name: filename) else {
+        guard let sound = NSDataAsset(name: filename), (withNarration || daySeven) else {
             return
         }
         do {

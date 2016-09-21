@@ -15,17 +15,18 @@ class GetPresentPage: SKScene {
     var originalPosition:CGPoint!
     var ref = CGMutablePath()
     var clickNumber = 0
-    var wrappCounter = 0
+    var wrappCounter = 1
     var day:BookDays!
     
     override func didMove(to view: SKView) {
+        SKTAudio.sharedInstance().pauseBackgroundMusic()
         btnLeft = childNode(withName: "leftCane")
         btnRight = childNode(withName: "rightCane")
         SKTAudio.sharedInstance().playNarration("wrappingPaperNarration")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard wrappCounter >= 4 else {
+        guard wrappCounter > 3 else {
             if let node = childNode(withName: "presentText") {
                 node.zPosition = -1
             }
@@ -42,7 +43,6 @@ class GetPresentPage: SKScene {
                 return
             }
             guard day != .dayFive else {
-                SKTAudio.sharedInstance().playSoundEffect("markerSound")
                 ref.move(to: location)
                 return
             }
@@ -67,9 +67,11 @@ class GetPresentPage: SKScene {
                     case .yoyo:
                         yoyoTouched(yoyo: present)
                         break
-                    case .steam:
-                        steamTouched(steam: present)
-                        break
+                    case .santa:
+                        if let steam = childNode(withName: "steam") {
+                            santaTouched(steam: steam)
+                            break
+                        }
                     case .bell:
                         bellTouched(bell: present)
                         break
@@ -92,15 +94,15 @@ class GetPresentPage: SKScene {
         if let present = childNode(withName: "present") as? SKSpriteNode {
             
             
-            if wrappCounter == 3 {
+            if wrappCounter == 4 {
 //                present.run(SKAction.setTexture(SKTexture(imageNamed:"wrappingBackground")))
                 present.run(SKAction.afterDelay(2, runBlock: {
                     present.zPosition = 0
                     SKTAudio.sharedInstance().playNarration(self.day.rawValue + "Present")
                 }))
             }
-            present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter + 1)")))
-            SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter)")  
+            present.run(SKAction.setTexture(SKTexture(imageNamed:imageName + "\(wrappCounter)")))
+            SKTAudio.sharedInstance().playSoundEffect("paper grab \(wrappCounter - 1)")
         }
     }
     
@@ -108,17 +110,17 @@ class GetPresentPage: SKScene {
         if day == BookDays.daySeven, let nextPage = BookEnding(fileNamed: "OnePresentPagesScene") {
             nextPage.bookChapter = BookChapter(day: .daySeven, pageNumbers: 3)
             nextPage.bookChapter.pageIndex = 1
-            goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+            goToScene(nextPage, transition: .curlUp)
         } else if let nextPage = ComeBackPage(fileNamed: day.rawValue + "ComeBack") {
             nextPage.day = day
-            goToScene(nextPage, transition: .curlUp, fromIndexPage:false)
+            goToScene(nextPage, transition: .curlUp)
         }
     }
     
     private func leftCaneTouched() {
         if let nextPage = HiddenPictures(fileNamed:day.rawValue + "HiddenPictures") {
             nextPage.day = day
-            goToScene(nextPage,transition: .curlUp, fromIndexPage: false)
+            goToScene(nextPage,transition: .curlUp)
         }
     }
     
@@ -133,7 +135,7 @@ class GetPresentPage: SKScene {
         yoyo.run(SKAction.moveTo(y: yoyo.position.y - yoyo.frame.size.height/1.3, duration: 0))
     }
     
-    private func steamTouched(steam:SKNode) {
+    private func santaTouched(steam:SKNode) {
         SKTAudio.sharedInstance().playSoundEffect("cupSound")
         run(SKAction.afterDelay(1, runBlock: {
             steam.zPosition = 2
@@ -177,7 +179,8 @@ class GetPresentPage: SKScene {
     
     private func lollipopTouched(lollipop:SKNode) {
         SKTAudio.sharedInstance().playSoundEffect("lollipopSound")
-        clickNumber = (clickNumber + 1) % 4
+        clickNumber = (clickNumber + 1) % 3
+        print((clickNumber + 1) % 3)
         lollipop.run(SKAction.setTexture(SKTexture(imageNamed: "lollipop\(clickNumber)")))
     }
     

@@ -38,12 +38,12 @@ class BookEnding: OnePresentPagesScene {
                 let nextScene = GetPresentPage(fileNamed:"DaySevenGetPresent")
             {
                 nextScene.day = .daySeven
-                goToScene(nextScene,transition: .curlUp, fromIndexPage: false)
+                goToScene(nextScene,transition: .curlUp)
             } else if bookChapter.pageIndex == bookChapter.pageNumbers,
                 let nextScene = ComeBackPage(fileNamed:"DaySevenComeBack")
             {
                 nextScene.day = .daySeven
-                goToScene(nextScene,transition: .curlUp, fromIndexPage: false)
+                goToScene(nextScene,transition: .curlUp)
             } else if btnLeft.contains(location) || btnRight.contains(location){
                 if let nextScene = BookEnding(fileNamed: "OnePresentPagesScene") {
                     candyCaneTouched(nextScene:nextScene, location: location)

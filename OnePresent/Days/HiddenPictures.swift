@@ -20,13 +20,14 @@ class HiddenPictures: SKScene {
         cameraNode.position = position
         self.addChild(cameraNode)
         self.camera = cameraNode
-        let panGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(panGesture)
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch))
+        view.addGestureRecognizer(pinchGesture)
         for i in 1...3 {
             if let hint = childNode(withName: "hint\(i)") {
                 if pictureNumber == i {
                     hint.isHidden = false
-                    run(SKAction.afterDelay(1, runBlock: { 
+                    SKTAudio.sharedInstance().playSoundEffect("hintAppear")
+                    run(SKAction.afterDelay(1, runBlock: {
                         self.playHintSound()
                     }))
                 } else {
@@ -38,7 +39,7 @@ class HiddenPictures: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
-        for touch in touches!  {
+        if let  touch = touches!.first  {
             let location = touch.location(in: self)
             handleHiddenObjectTouch(at: location)
         }
@@ -49,7 +50,6 @@ class HiddenPictures: SKScene {
         for node in nodes {
             if let name = node.name {
                 if let hiddenObject = HiddenObjects(rawValue:name), isAnimating == false {
-                    isAnimating = true
                     switch hiddenObject {
                     case .pearl:
                         pearlTouched(pearl: node)
@@ -115,20 +115,29 @@ class HiddenPictures: SKScene {
                         sledTouched(sled: node)
                         break
                     }
+                    return
                 }
             }
         }
+//        if self.camera!.xScale == CGFloat(0.5) {
+//           self.camera?.run(SKAction.move(to: location, duration: 0.5))
+//            print(intersects(self.camera!))
+//        }
+        
     }
+    
     
     private func pearlTouched(pearl:SKNode) {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("pearlPressed")
-        run(SKAction.screenRotateWithNode(pearl, angle: 1, oscillations: 10, duration: 4)) {
+        run(SKAction.screenRotateWithNode(pearl, angle: 1, oscillations: 10, duration: 4))
+        run(SKAction.afterDelay(2, runBlock: { 
             self.pictureNumber = 2
             self.setHint()
-        }
+        }))
         pearl.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "pearlTouchedImage"))))
     }
     
@@ -136,6 +145,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playBackgroundMusic("bugPressed")
         let path = UIBezierPath()
         let start = childNode(withName: "graph1")!
@@ -158,6 +168,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         fish.run(SKAction.jumpToHeight(100, duration: 2, originalPosition: fish.position))
         SKTAudio.sharedInstance().playSoundEffect("fishPressed")
         run(SKAction.actionWithEffect(SKTRotateEffect(node: fish, duration: 2, startAngle: 0, endAngle: 13.0))) {
@@ -175,6 +186,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("keySound")
         run(SKAction.screenRotateWithNode(key, angle: 1, oscillations: 10, duration: 2)) {
             self.pictureNumber = 2
@@ -188,6 +200,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("candleSound")
         candle.run(SKAction.animate(with: [SKTexture(image: #imageLiteral(resourceName: "candleTouchedImage")),
                                            SKTexture(image: #imageLiteral(resourceName: "candleImage"))], timePerFrame: 1)) {
@@ -203,6 +216,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("frogSound")
         frog.run(SKAction.jumpToHeight(60, duration: 0.5, originalPosition: frog.position)) {
             if let playSong = PlayASongGame(fileNamed:"PlayASongGame") {
@@ -218,6 +232,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("goatSound")
         run(SKAction.screenRotateWithNode(goat, angle: 1, oscillations: 5, duration: 4)) {
             self.pictureNumber = 2
@@ -229,6 +244,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playBackgroundMusic("flowerSound")
         flower.run(SKAction.animate(with: [SKTexture(image:#imageLiteral(resourceName: "flowerTouchedImage"))],
                                     timePerFrame: 1,
@@ -252,6 +268,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("mailSound")
         mail.run(SKAction.move(to: CGPoint(x:mail.position.x,y:mail.position.y + 5), duration: 0.2))
         mail.run(SKAction.animate(with: [SKTexture(image:#imageLiteral(resourceName: "mailImage")),
@@ -271,6 +288,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("clockSound")
         sock.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "sockTouchedImage"))))
         run(SKAction.screenRotateWithNode(sock, angle: 1, oscillations: 10, duration: 2)) {
@@ -283,6 +301,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("heartSound")
         run(SKAction.screenZoomWithNode(heart, amount: CGPoint(x: 5, y: 5), oscillations: 2, duration: 2)) {
             self.pictureNumber = 3
@@ -294,6 +313,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("wingsSound")
         wings.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "wingsTouchedImage"))))
         if let fairDust = childNode(withName: "fairDust") {
@@ -312,6 +332,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("jacketSound")
         jacket.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "jacketTouchedImage"))))
         run(SKAction.afterDelay(1, runBlock: {
@@ -324,6 +345,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("hatSound")
         run(SKAction.actionWithEffect(SKTRotateEffect(node: hat, duration: 1, startAngle: 0, endAngle: -3)))
         hat.run(SKAction.moveTo(x: hat.position.x + 30, duration: 1)) {
@@ -339,6 +361,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("glueSound")
         glue.run(SKAction.jumpToHeight(30, duration: 2, originalPosition: glue.position)) {
             if let simonGame = SimonGame(fileNamed:"SimonGame") {
@@ -354,6 +377,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("starSound")
         star.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "starTouchedImage")), resize: true))
         run(SKAction.afterDelay(1, runBlock: {
@@ -366,6 +390,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("glassesSound")
         glasses.run(SKAction.setTexture(SKTexture(image: #imageLiteral(resourceName: "glassesTouchedImage"))))
         run(SKAction.afterDelay(1, runBlock: {
@@ -378,6 +403,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("cakeSound")
         let circlePath = UIBezierPath(arcCenter: flake.position, radius: 30, startAngle: 0, endAngle: 2 * CGFloat(M_PI), clockwise: true)
         let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
@@ -398,6 +424,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 1 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("caneSound")
         cane.run(SKAction.jumpToHeight(20, duration: 2, originalPosition: cane.position)) {
             self.pictureNumber = 2
@@ -409,6 +436,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 2 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("spoonSound")
         run(SKAction.actionWithEffect(SKTRotateEffect(node: spoon, duration: 2, startAngle: 0, endAngle: 13))) {
             self.pictureNumber = 3
@@ -420,6 +448,7 @@ class HiddenPictures: SKScene {
         guard pictureNumber == 3 else {
             return
         }
+        isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("sledSound")
         sled.run(SKAction.move(to: CGPoint(x: sled.position.x + 30, y: sled.position.y + 40), duration: 1))
         run(SKAction.actionWithEffect(SKTRotateEffect(node: sled, duration: 1, startAngle: 0, endAngle: 0.3)))
@@ -460,12 +489,13 @@ class HiddenPictures: SKScene {
         SKTAudio.sharedInstance().playNarration(day.rawValue + "NarrationHint\(pictureNumber)")
     }
     
-    func handlePan(pinchGesture:UIPinchGestureRecognizer) {
+    func handlePinch(pinchGesture:UIPinchGestureRecognizer) {
         let scale:CGFloat!
         if pinchGesture.velocity >= 0 {
-            scale = 1
-        } else {
             scale = 0.5
+        } else {
+            scale = 1
+            self.camera!.run(SKAction.move(to: position, duration: 0.1))
         }
         let zoomInAction = SKAction.scale(to: scale, duration: 0.5)
         self.camera?.run(zoomInAction)

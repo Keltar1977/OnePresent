@@ -157,8 +157,6 @@ extension MazeGameScene: SKPhysicsContactDelegate {
             
         } else if (contact.bodyA.categoryBitMask == Collision.FinishHole && contact.bodyB.categoryBitMask == Collision.Ball) || (contact.bodyB.categoryBitMask == Collision.FinishHole && contact.bodyA.categoryBitMask == Collision.Ball) {
             alertWon()
-        } else if contact.bodyA.categoryBitMask == Collision.Ball || contact.bodyB.categoryBitMask == Collision.Ball{
-            SKTAudio.sharedInstance().playSoundEffect("Thud into snow")
-        }
+        } 
     }
 }

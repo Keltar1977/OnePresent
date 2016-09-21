@@ -37,7 +37,7 @@ enum PresentsType: String {
     case yoyo = "yoyo"
 
     //Page Two
-    case steam = "steam"
+    case santa = "santa"
 
     //Page Three
     case bell = "bell"
@@ -59,6 +59,14 @@ enum BookDays: String {
     case daySix = "DaySix"
     case daySeven = "DaySeven"
     static let allValues = [dayOne, dayTwo, dayThree, dayFour, dayFive ,daySix, daySeven]
+    
+    func nextDay() -> BookDays {
+        if self == BookDays.allValues.last {
+            return self
+        }
+        let index = BookDays.allValues.index(of: self)!
+        return BookDays.allValues[index + 1]
+    }
 }
 
 enum NumberLevels: Int {

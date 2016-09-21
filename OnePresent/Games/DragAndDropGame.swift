@@ -66,7 +66,7 @@ class DragAndDropGame: SKScene {
     func setNodeAction(_ node:SKSpriteNode, i:Int, count:Int) {
 
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: size.width/2, y: size.height/2), radius: size.height * 0.44, startAngle: 2 * CGFloat(M_PI)/CGFloat(count) * CGFloat(i), endAngle:2 * CGFloat(M_PI)/CGFloat(count)  * CGFloat(i) + 2 * CGFloat(M_PI), clockwise: true)
-        let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
+        let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 400)
         node.run(SKAction.repeatForever(movePath))
     }
     
@@ -161,7 +161,7 @@ class DragAndDropGame: SKScene {
         let count = nodeArray.count
         let circlePath = UIBezierPath(arcCenter: view!.center, radius: 300, startAngle: 2 * CGFloat(M_PI)/CGFloat(count) * iteration, endAngle:2 * CGFloat(M_PI)/CGFloat(count)  * iteration + 2 * CGFloat(M_PI), clockwise: true)
         activeNode.position = circlePath.currentPoint
-        let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
+        let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 400)
         activeNode.run(SKAction.repeatForever(movePath))
         var inFrame = false
         for node in nodeArray {

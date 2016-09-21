@@ -14,6 +14,10 @@ class OnePresentViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        let userdefaults = UserDefaults.standard
+        if !userdefaults.bool(forKey: "DayOneNumber") {
+            userdefaults.set(true, forKey: "DayOneNumber")
+        }
         if let scene = TitlePage(fileNamed: "TitlePage") {
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -33,7 +37,7 @@ class OnePresentViewController: UIViewController {
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             let skView = self.view as! SKView
-            if let scene = skView.scene as? ComeBackPage {
+            if let scene = skView.scene as? ComeBackPage, scene.day != .daySeven {
                 scene.snowfall = scene.startSnowfall(emitterNode: scene.snowfall)
             }
         }

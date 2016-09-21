@@ -43,7 +43,8 @@ class IndexPageScene: SKScene {
                     default:
                         pageNumbers = 2
                     }
-                    if let scene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
+                    let userdefaults = UserDefaults.standard
+                    if let scene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene"), userdefaults.bool(forKey: day.rawValue + "Number") {
                         let bookChapter = BookChapter(day: day, pageNumbers: pageNumbers)
                         scene.bookChapter = bookChapter
                         SKTAudio.sharedInstance().playSoundEffect("openPresent")

@@ -41,6 +41,8 @@
 		9C3F040A1D86983B002ED1FA /* BookEnding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3F04091D86983B002ED1FA /* BookEnding.swift */; };
 		9C4317261D7DA2D2006297E0 /* HiddenPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4317251D7DA2D2006297E0 /* HiddenPictures.swift */; };
 		9C4317281D7DBA00006297E0 /* GetPresentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4317271D7DBA00006297E0 /* GetPresentPage.swift */; };
+		9C46C2C91D9166E800DB0519 /* DownloadPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46C2C81D9166E800DB0519 /* DownloadPage.swift */; };
+		9C46C2CB1D9166FB00DB0519 /* DownloadPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */; };
 		9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C483B371D7819BF00A53426 /* DrawingPage.sks */; };
 		9C561D611D6F445A0080E909 /* DayFiveComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */; };
 		9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */; };
@@ -120,6 +122,8 @@
 		9C3F04091D86983B002ED1FA /* BookEnding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BookEnding.swift; path = Days/BookEnding.swift; sourceTree = "<group>"; };
 		9C4317251D7DA2D2006297E0 /* HiddenPictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HiddenPictures.swift; path = Days/HiddenPictures.swift; sourceTree = "<group>"; };
 		9C4317271D7DBA00006297E0 /* GetPresentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPresentPage.swift; path = Days/GetPresentPage.swift; sourceTree = "<group>"; };
+		9C46C2C81D9166E800DB0519 /* DownloadPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadPage.swift; sourceTree = "<group>"; };
+		9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DownloadPage.sks; sourceTree = "<group>"; };
 		9C483B371D7819BF00A53426 /* DrawingPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DrawingPage.sks; path = Days/DrawingPage.sks; sourceTree = "<group>"; };
 		9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveComeBack.sks; sourceTree = "<group>"; };
 		9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveGetPresent.sks; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				9CD5864B1D377DB900190278 /* snowfall.sks */,
+				9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */,
+				9C46C2C81D9166E800DB0519 /* DownloadPage.swift */,
 			);
 			path = Additionals;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				9C561D711D6F445A0080E909 /* DayOneGetPresent.sks in Resources */,
 				9C561D6F1D6F445A0080E909 /* DayOneComeBack.sks in Resources */,
 				9C561DA21D6F448C0080E909 /* DragAndDropGame.sks in Resources */,
+				9C46C2CB1D9166FB00DB0519 /* DownloadPage.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +612,7 @@
 				9C561DAA1D6F448C0080E909 /* PolkaDotGame.swift in Sources */,
 				9C2C38741D5E12870018BE61 /* TitlePage.swift in Sources */,
 				9C3A64961CE0F1B700355C92 /* SKTEffects.swift in Sources */,
+				9C46C2C91D9166E800DB0519 /* DownloadPage.swift in Sources */,
 				9C3A64901CE0F1B700355C92 /* Int+Extensions.swift in Sources */,
 				9C561DA61D6F448C0080E909 /* MazeGameScene.swift in Sources */,
 				9C4317281D7DBA00006297E0 /* GetPresentPage.swift in Sources */,

@@ -49,6 +49,7 @@ class DrawingPage: OnePresentPagesScene {
                 }
             }
             if let startOver = childNode(withName: "startOver"), startOver.contains(location) {
+                SKTAudio.sharedInstance().playSoundEffect("dayButtonPressed")
                 startOverAction()
                 return
             }
@@ -58,14 +59,13 @@ class DrawingPage: OnePresentPagesScene {
             }
             if btnRight.contains(location) {
                 if let nextPage = TitlePage(fileNamed: "TitlePage") {
-                    goToScene(nextPage, transition: .curlUp, fromIndexPage: false)
+                    goToScene(nextPage, transition: .curlUp)
                 }
             } else if btnLeft.contains(location) {
                 if (prevPage != nil) {
-                    goToScene(prevPage, transition: .curlUp, fromIndexPage: false)
+                    goToScene(prevPage, transition: .curlDown)
                 }
             } else {
-                SKTAudio.sharedInstance().playSoundEffect("markerSound")
                 ref.move(to: location)
             }
         }

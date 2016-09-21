@@ -63,7 +63,7 @@ class OnePresentPagesScene: SKScene {
             } else if bookChapter.pageIndex == bookChapter.pageNumbers, btnRight.contains(location) {
                 if let nextScene = HiddenPictures(fileNamed:bookChapter.day.rawValue + "HiddenPictures") {
                     nextScene.day = bookChapter.day 
-                    goToScene(nextScene,transition: .curlUp, fromIndexPage: bookChapter.fromIndexPage)
+                    goToScene(nextScene,transition: .curlUp)
                 }
             } else if btnLeft.contains(location) || btnRight.contains(location) {
                 if let nextScene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene") {
@@ -83,7 +83,7 @@ class OnePresentPagesScene: SKScene {
         if nextScene.bookChapter.fromIndexPage {
             simpleTransition(nextScene, startGame: false, direction: .left)
         } else {
-           goToScene(nextScene,transition: transition, fromIndexPage: bookChapter.fromIndexPage)
+           goToScene(nextScene,transition: transition)
         }
         
 
@@ -112,18 +112,14 @@ class OnePresentPagesScene: SKScene {
 }
 
 extension SKScene {
-    final func goToScene(_ scene: SKScene, transition:UIViewAnimationTransition, fromIndexPage:Bool) {
+    final func goToScene(_ scene: SKScene, transition:UIViewAnimationTransition) {
         scene.scaleMode = .fill
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDelegate(self)
         UIView.setAnimationDuration(0.4)
         UIView.setAnimationTransition(transition, for: self.view!, cache: false)
         UIView.commitAnimations()
-        if fromIndexPage {
-            SKTAudio.sharedInstance().playSoundEffect("dayButtonPressed")
-        } else {
-            SKTAudio.sharedInstance().playSoundEffect("pageFlip")
-        }
+        SKTAudio.sharedInstance().playSoundEffect("pageFlip")
         UIView.animate(withDuration: 0.6, animations: {
             self.view?.presentScene(scene)
         }) { (finished) in
@@ -148,6 +144,8 @@ extension SKScene {
         scene.scaleMode = .fill
         if startGame {
             SKTAudio.sharedInstance().playSoundEffect("startGame")
+        } else if let current = self as? OnePresentPagesScene, current.bookChapter.fromIndexPage {
+            SKTAudio.sharedInstance().playSoundEffect("dayButtonPressed")
         } else {
             SKTAudio.sharedInstance().playSoundEffect("pageFlip")
         }
@@ -162,8 +160,9 @@ extension SKScene {
             let texture = SKTexture(imageNamed: "explosion\(i)")
             textures.append(texture)
         }
-        explosion.run(SKAction.animate(with: textures, timePerFrame: 0.2, resize: true, restore: false)) {
-            self.goToScene(scene, transition: .curlUp, fromIndexPage: false)
-        }
+        explosion.run(SKAction.animate(with: textures, timePerFrame: 0.2, resize: true, restore: false))
+        run(SKAction.afterDelay(3, runBlock: { 
+            self.simpleTransition(scene, startGame: false, direction: .right)
+        }))
     }
 }
