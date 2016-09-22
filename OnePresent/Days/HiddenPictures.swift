@@ -13,6 +13,7 @@ class HiddenPictures: SKScene {
     var pictureNumber = 1
     var day:BookDays!
     var isAnimating = false
+    var canMove = true
 
     
     override func didMove(to view: SKView) {
@@ -119,10 +120,19 @@ class HiddenPictures: SKScene {
                 }
             }
         }
-//        if self.camera!.xScale == CGFloat(0.5) {
-//           self.camera?.run(SKAction.move(to: location, duration: 0.5))
-//            print(intersects(self.camera!))
-//        }
+        if self.camera!.xScale == CGFloat(0.5), canMove {
+            if let node = childNode(withName: "background") {
+                let leftBorder = node.position.x - node.frame.size.width/2
+                let rightBorder = node.position.x + node.frame.size.width/2
+                let topBorder = node.position.y + node.frame.size.height/2
+                let bottomBorder = node.position.y - node.frame.size.height/2
+                if location.x - node.frame.size.width/4 > leftBorder && location.x + node.frame.size.width/4 < rightBorder
+                    && location.y + node.frame.size.height/4 < topBorder && location.y - node.frame.size.height/4 > bottomBorder {
+                    let impulseVector = CGVector(dx: location.x - self.camera!.position.x, dy: location.y - self.camera!.position.y)
+                    self.camera?.run(SKAction.move(by: impulseVector, duration: 0.2))
+                }
+            }
+        }
         
     }
     
@@ -405,10 +415,10 @@ class HiddenPictures: SKScene {
         }
         isAnimating = true
         SKTAudio.sharedInstance().playSoundEffect("cakeSound")
-        let circlePath = UIBezierPath(arcCenter: flake.position, radius: 30, startAngle: 0, endAngle: 2 * CGFloat(M_PI), clockwise: true)
+        let circlePath = UIBezierPath(arcCenter: flake.position, radius: 30, startAngle: 0.8, endAngle: 2 * CGFloat(M_PI), clockwise: true)
         let movePath = SKAction.follow(circlePath.cgPath, asOffset: false, orientToPath: false, speed: 50)
         let point = CGPoint(x: flake.position.x + sqrt(450), y: flake.position.y + sqrt(450))
-        flake.run(SKAction.move(to: point, duration: 1)) {
+        flake.run(SKAction.move(to: point, duration: 0.4)) {
             flake.run(movePath) {
                 if let dragAndDropGame = DragAndDropGame(fileNamed:"DragAndDropGame") {
                     SKTAudio.sharedInstance().playSoundEffect("hiddenPictureFinish")
@@ -490,14 +500,17 @@ class HiddenPictures: SKScene {
     }
     
     func handlePinch(pinchGesture:UIPinchGestureRecognizer) {
+        canMove = false
         let scale:CGFloat!
         if pinchGesture.velocity >= 0 {
             scale = 0.5
         } else {
             scale = 1
-            self.camera!.run(SKAction.move(to: position, duration: 0.1))
+            self.camera!.run(SKAction.move(to: position, duration: 0.5))
         }
         let zoomInAction = SKAction.scale(to: scale, duration: 0.5)
-        self.camera?.run(zoomInAction)
+        self.camera?.run(zoomInAction) {
+            self.canMove = true
+        }
     }
 }

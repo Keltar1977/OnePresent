@@ -20,6 +20,7 @@ class JigsawPuzzle: SKScene {
     var maxZPosition: CGFloat = Layer.Tiles
     var imageSize: CGSize!
     var willTransit = false
+    let startOverButton = SKSpriteNode(imageNamed: "startOver")
 
      override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -40,6 +41,9 @@ class JigsawPuzzle: SKScene {
             self.setBorder()
             self.startNewPuzzleGameLevel()
         }
+        startOverButton.position = CGPoint(x: view.center.x - view.frame.size.width/2.8, y: view.center.y)
+        startOverButton.zPosition = 3
+        addChild(startOverButton)
     }
 
     func startNewPuzzleGameLevel() {
@@ -80,9 +84,9 @@ class JigsawPuzzle: SKScene {
     func smashAndCrashDown() {
         let fallRect1 = CGRect(x: 50, y: 50, width: frame.width - 100, height: 5)
         let fallRect2 = CGRect(x: 50, y: frame.height - 130, width: frame.width - 100, height: 5)
-        let fallRect3 = CGRect(x: 55, y: 50, width: 5, height: frame.height - 110)
-        let fallRect4 = CGRect(x: frame.width - 65, y: 50, width: 5, height: frame.height - 110)
-        let rects = [fallRect1, fallRect2, fallRect3, fallRect4]
+//        let fallRect3 = CGRect(x: 55, y: 50, width: 5, height: frame.height - 110)
+//        let fallRect4 = CGRect(x: frame.width - 65, y: 50, width: 5, height: frame.height - 110)
+        let rects = [fallRect1, fallRect2]//, fallRect3, fallRect4]
         for piece in pieces {
             let rect = rects[randomInRange(0, upper: rects.count - 1)]
             let point = CGPoint.randomPointInRect(rect)
@@ -131,6 +135,11 @@ class JigsawPuzzle: SKScene {
         if let puzzleBorder = border {
             for touch in touches {
                 let loc = touch.location( in: puzzleBorder)
+                let location = touch.location( in: self)
+                if startOverButton.contains(location) {
+                    self.startNewPuzzleGameLevel()
+                    return
+                }
                 let nodes = puzzleBorder.nodes(at: loc)
                 var piecess = [Piece]()
                 for node in nodes where node.name == pieceName {
@@ -159,24 +168,28 @@ class JigsawPuzzle: SKScene {
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let loc = touch.location(in: border!)
-            movingPiece?.touchMoves(point: loc)
+            if let puzzleBorder = border {
+                let loc = touch.location(in: puzzleBorder)
+                movingPiece?.touchMoves(point: loc)
+            }
         }
 
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        movingPiece?.touchEnd()
-        if let node = movingPiece, node.isMoving {
-            radar(piece: node)
-            node.isMoving = false
-        } else {
-            run(SKAction.afterDelay(2, runBlock: { 
-                self.checkPosition()
-            }))
-            
+        if let _ = border {
+            movingPiece?.touchEnd()
+            if let node = movingPiece, node.isMoving {
+                radar(piece: node)
+                node.isMoving = false
+            } else {
+                run(SKAction.afterDelay(2, runBlock: { 
+                    self.checkPosition()
+                }))
+                
+            }
+            movingPiece = nil
         }
-        movingPiece = nil
     }
 
     func radar(piece: Piece) {

@@ -43,13 +43,13 @@
 		9C4317281D7DBA00006297E0 /* GetPresentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4317271D7DBA00006297E0 /* GetPresentPage.swift */; };
 		9C46C2C91D9166E800DB0519 /* DownloadPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C46C2C81D9166E800DB0519 /* DownloadPage.swift */; };
 		9C46C2CB1D9166FB00DB0519 /* DownloadPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */; };
+		9C46C2CD1D92E01C00DB0519 /* DayFourHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C46C2CC1D92E01C00DB0519 /* DayFourHiddenPictures.sks */; };
 		9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C483B371D7819BF00A53426 /* DrawingPage.sks */; };
 		9C561D611D6F445A0080E909 /* DayFiveComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */; };
 		9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */; };
 		9C561D651D6F445A0080E909 /* DayFiveHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */; };
 		9C561D681D6F445A0080E909 /* DayFourComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D321D6F445A0080E909 /* DayFourComeBack.sks */; };
 		9C561D6A1D6F445A0080E909 /* DayFourGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */; };
-		9C561D6C1D6F445A0080E909 /* DayFourHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */; };
 		9C561D6F1D6F445A0080E909 /* DayOneComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3A1D6F445A0080E909 /* DayOneComeBack.sks */; };
 		9C561D711D6F445A0080E909 /* DayOneGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3C1D6F445A0080E909 /* DayOneGetPresent.sks */; };
 		9C561D731D6F445A0080E909 /* DayOneHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D3E1D6F445A0080E909 /* DayOneHiddenPictures.sks */; };
@@ -124,13 +124,13 @@
 		9C4317271D7DBA00006297E0 /* GetPresentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPresentPage.swift; path = Days/GetPresentPage.swift; sourceTree = "<group>"; };
 		9C46C2C81D9166E800DB0519 /* DownloadPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadPage.swift; sourceTree = "<group>"; };
 		9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DownloadPage.sks; sourceTree = "<group>"; };
+		9C46C2CC1D92E01C00DB0519 /* DayFourHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourHiddenPictures.sks; sourceTree = "<group>"; };
 		9C483B371D7819BF00A53426 /* DrawingPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DrawingPage.sks; path = Days/DrawingPage.sks; sourceTree = "<group>"; };
 		9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveComeBack.sks; sourceTree = "<group>"; };
 		9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveGetPresent.sks; sourceTree = "<group>"; };
 		9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveHiddenPictures.sks; sourceTree = "<group>"; };
 		9C561D321D6F445A0080E909 /* DayFourComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourComeBack.sks; sourceTree = "<group>"; };
 		9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourGetPresent.sks; sourceTree = "<group>"; };
-		9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourHiddenPictures.sks; sourceTree = "<group>"; };
 		9C561D3A1D6F445A0080E909 /* DayOneComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneComeBack.sks; sourceTree = "<group>"; };
 		9C561D3C1D6F445A0080E909 /* DayOneGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneGetPresent.sks; sourceTree = "<group>"; };
 		9C561D3E1D6F445A0080E909 /* DayOneHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayOneHiddenPictures.sks; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 			children = (
 				9C561D321D6F445A0080E909 /* DayFourComeBack.sks */,
 				9C561D341D6F445A0080E909 /* DayFourGetPresent.sks */,
-				9C561D361D6F445A0080E909 /* DayFourHiddenPictures.sks */,
+				9C46C2CC1D92E01C00DB0519 /* DayFourHiddenPictures.sks */,
 			);
 			name = "Day Four";
 			path = "Days/Day Four";
@@ -501,13 +501,13 @@
 				9C561D841D6F445A0080E909 /* DayThreeComeBack.sks in Resources */,
 				9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */,
 				9C561D881D6F445A0080E909 /* DayThreeHiddenPictures.sks in Resources */,
-				9C561D6C1D6F445A0080E909 /* DayFourHiddenPictures.sks in Resources */,
 				9C561D7D1D6F445A0080E909 /* DaySixComeBack.sks in Resources */,
 				9C561D861D6F445A0080E909 /* DayThreeGetPresent.sks in Resources */,
 				9C561D7A1D6F445A0080E909 /* DaySevenHiddenPictures.sks in Resources */,
 				9C3A646B1CE0C79600355C92 /* Main.storyboard in Resources */,
 				9C561DAB1D6F448C0080E909 /* SimonGame.sks in Resources */,
 				9C03F1801CEA2F8300CB6C2E /* Chime green.mp3 in Resources */,
+				9C46C2CD1D92E01C00DB0519 /* DayFourHiddenPictures.sks in Resources */,
 				9C561D8D1D6F445A0080E909 /* DayTwoGetPresent.sks in Resources */,
 				9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */,
 				9C561D811D6F445A0080E909 /* DaySixHiddenPictures.sks in Resources */,

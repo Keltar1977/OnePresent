@@ -20,6 +20,9 @@ class DownloadPage: SKScene {
                     goToScene(prevPage, transition: .curlDown)
                 }
             }
+            if let url = childNode(withName: "url"), url.contains(location) {
+                UIApplication.shared.openURL(NSURL(string: "http://rainbootmedia.com") as! URL)
+            }
         }
     }
 }

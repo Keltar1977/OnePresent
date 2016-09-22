@@ -25,13 +25,18 @@ class ComeBackPage: SKScene {
         if day != .daySeven {
             SKTAudio.sharedInstance().playBackgroundMusic("windBlow")
         } else {
+            if let promoCode = childNode(withName: "promoCode") {
+                promoCode.run(SKAction.fadeOut(withDuration: 0.1))
+            }
             SKTAudio.sharedInstance().daySeven = true
             snowfall = startSnowfall(emitterNode: snowfall)
             if !SKTAudio.sharedInstance().backgroundMusicPlayer!.isPlaying {
                 SKTAudio.sharedInstance().playBackgroundMusic("endingSong")
             }
         }
-        SKTAudio.sharedInstance().playNarration(day.rawValue + "NarrationComeBack")
+        run(SKAction.afterDelay(1, runBlock: {
+            SKTAudio.sharedInstance().playNarration(self.day.rawValue + "NarrationComeBack")
+        }))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,7 +81,7 @@ class ComeBackPage: SKScene {
             let location = touch.location(in: self)
             if let promoCode = childNode(withName: "promoCode"), promoCode.contains(location) {
                 promoCode.zPosition = 2
-                promoCode.run(SKAction.fadeIn(withDuration: 1))
+                promoCode.run(SKAction.fadeIn(withDuration: 10))
             }
         }
     }
