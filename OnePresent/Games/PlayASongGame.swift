@@ -48,6 +48,7 @@ class PlayASongGame: SKScene {
                     if node.name == "key\(pattern[sequence][counter])" {
                         counter += 1
                     } else {
+                        SKTAudio.sharedInstance().playSoundEffect("pianoGameMistake")
                         counter = 0
                     }
                     

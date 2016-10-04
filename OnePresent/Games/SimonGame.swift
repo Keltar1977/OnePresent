@@ -17,7 +17,7 @@ class SimonGame: SKScene {
     var nodeArray = [SKNode]()
     var lengthOfSequance = 0
     var counter = 0
-    var updating = false
+    var updating = true
     override func didMove(to view: SKView) {
         nodeArray = [childNode(withName: "blue")!,childNode(withName: "yellow")!,childNode(withName: "green")!,childNode(withName: "purple")!]
         if let node = childNode(withName: "DayFivePresentImage") {

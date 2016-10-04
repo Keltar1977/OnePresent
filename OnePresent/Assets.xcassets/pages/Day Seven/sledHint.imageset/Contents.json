@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "sledHint.png",
+      "filename" : "hintMaze.png",
       "scale" : "1x"
     },
     {

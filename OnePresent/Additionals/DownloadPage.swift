@@ -15,6 +15,12 @@ class DownloadPage: SKScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
+            if let rightCane = childNode(withName: "rightCane"), rightCane.contains(location) {
+                if let nextPage = TitlePage(fileNamed: "TitlePage") {
+                    goToScene(nextPage, transition: .curlUp)
+                }
+                
+            }
             if let leftCane = childNode(withName: "leftCane"), leftCane.contains(location) {
                 if (prevPage != nil) {
                     goToScene(prevPage, transition: .curlDown)

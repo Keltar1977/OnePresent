@@ -81,6 +81,10 @@ class GetPresentPage: SKScene {
                     case .lollipop:
                         lollipopTouched(lollipop: present)
                         break
+                        
+                    case .doll:
+                        dollTouched(doll: present)
+                        break
                     }
                 }
                 
@@ -182,6 +186,10 @@ class GetPresentPage: SKScene {
         clickNumber = (clickNumber + 1) % 3
         print((clickNumber + 1) % 3)
         lollipop.run(SKAction.setTexture(SKTexture(imageNamed: "lollipop\(clickNumber)")))
+    }
+    
+    private func dollTouched(doll:SKNode) {
+        SKTAudio.sharedInstance().playSoundEffect("dollSound")
     }
     
 }

@@ -11,8 +11,8 @@ import SpriteKit
 
 class ComeBackPage: SKScene {
     
-    var btnLeft:SKNode!
-    var btnRight:SKNode!
+    var btnLeft = SKNode()
+    var btnRight = SKNode()
     var day:BookDays!
     var snowfall:SKEmitterNode! = nil
     
@@ -20,8 +20,12 @@ class ComeBackPage: SKScene {
     override func didMove(to view: SKView) {
         let userdefaults = UserDefaults.standard
         userdefaults.set(true, forKey: day.nextDay().rawValue + "Number")
-        btnLeft = childNode(withName: "leftCane")
-        btnRight = childNode(withName: "rightCane")
+        if let node = childNode(withName: "leftCane") {
+            btnLeft = node
+        }
+        if let node = childNode(withName: "rightCane") {
+            btnRight = node
+        }
         if day != .daySeven {
             SKTAudio.sharedInstance().playBackgroundMusic("windBlow")
         } else {
@@ -33,6 +37,11 @@ class ComeBackPage: SKScene {
             if !SKTAudio.sharedInstance().backgroundMusicPlayer!.isPlaying {
                 SKTAudio.sharedInstance().playBackgroundMusic("endingSong")
             }
+        }
+        if let finalPresent = childNode(withName: "finalPresent") {
+            finalPresent.run(SKAction.repeatForever(SKAction.jumpToHeight(20,
+                                                                          duration: 2,
+                                                                          originalPosition: finalPresent.position)))
         }
         run(SKAction.afterDelay(1, runBlock: {
             SKTAudio.sharedInstance().playNarration(self.day.rawValue + "NarrationComeBack")
@@ -91,10 +100,20 @@ class ComeBackPage: SKScene {
             SKTAudio.sharedInstance().playSoundEffect("snowman high 5")
             SKTAudio.sharedInstance().soundEffectPlayer?.volume = 5.0
             hand.name = "touchedHand"
+            let originalPosition = hand.position
             hand.run(SKAction.actionWithEffect(SKTRotateEffect(node: hand,
                                                                duration: 0.25,
                                                                startAngle: 0,
-                                                               endAngle: -1.5)))
+                                                               endAngle: -1.5))) {
+                hand.run(SKAction.actionWithEffect(SKTRotateEffect(node: hand,
+                                                                   duration: 0.25,
+                                                                   startAngle: -1.5,
+                                                                   endAngle: 0))) {
+                                                                    hand.name = "hand"
+                                                                }
+                hand.run(SKAction.move(to: originalPosition, duration: 0.3))
+                
+            }
             hand.run(SKAction.moveTo(y: hand.position.y - 140, duration: 0.25))
             hand.run(SKAction.moveTo(x: hand.position.x + 20, duration: 0.125))
         }

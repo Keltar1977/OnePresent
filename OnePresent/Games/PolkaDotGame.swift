@@ -90,7 +90,7 @@ class PolkaDotGame: SKScene {
                                 self.explosionAnimation(explosion: explosion, scene:scene)
                             }
                         } else {
-                            if let background = childNode(withName: "background") {
+                            if let background = childNode(withName: "background"), counter % 4 == 0 {
                                 background.xScale = -background.xScale
                             }
                             createNewDot()

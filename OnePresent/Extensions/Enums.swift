@@ -47,6 +47,9 @@ enum PresentsType: String {
 
     //Page Six
     case lollipop = "lollipop"
+    
+    //Page Seven
+    case doll = "doll"
 
 }
 

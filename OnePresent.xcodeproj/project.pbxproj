@@ -212,6 +212,7 @@
 				9C4317271D7DBA00006297E0 /* GetPresentPage.swift */,
 				9C017DEA1D76E44800947469 /* DrawingPage.swift */,
 				9C483B371D7819BF00A53426 /* DrawingPage.sks */,
+				9C3F04091D86983B002ED1FA /* BookEnding.swift */,
 				9C561D391D6F445A0080E909 /* Day One */,
 				9C561D591D6F445A0080E909 /* Day Two */,
 				9C561D511D6F445A0080E909 /* Day Three */,
@@ -246,7 +247,6 @@
 			children = (
 				9C3A64611CE0C79600355C92 /* AppDelegate.swift */,
 				9C2C386C1D5E10260018BE61 /* Days */,
-				9C3F04091D86983B002ED1FA /* BookEnding.swift */,
 				9CD5864A1D377DA300190278 /* Additionals */,
 				9C561D921D6F448C0080E909 /* Games */,
 				9C3A64671CE0C79600355C92 /* OnePresentViewController.swift */,

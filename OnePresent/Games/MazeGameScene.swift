@@ -13,15 +13,10 @@ class MazeGameScene: SKScene {
     var sled: SKSpriteNode!
     var nameArray:[String] = []
     var lastTouch: CGPoint? = nil
-    var collisionCounter = 0
-    
     // MARK: - SpriteKit Methods
     
     override func didMove(to view: SKView) {
 
-        if let hintLayer = childNode(withName: "hintLayer") {
-            hintLayer.run(SKAction.fadeOut(withDuration: 0.1))
-        }
         if let node = childNode(withName: "DaySevenPresentImage") {
             node.run(SKAction.fadeOut(withDuration: 3)) {
                 node.zPosition = -2
@@ -48,7 +43,7 @@ class MazeGameScene: SKScene {
         nameArray.append("Wall")
         makePath("RightWall")
         nameArray.append("RightWall")
-        for i in 1...8 {
+        for i in 1...12 {
             makePath("Wall" + "\(i)")
             nameArray.append("Wall" + "\(i)")
         }
@@ -152,11 +147,6 @@ extension MazeGameScene: SKPhysicsContactDelegate {
                 soundName = "Pinball bells"
             default:
                 soundName = "bumper"
-            }
-            collisionCounter += 1
-            if collisionCounter == 5, let hintLayer = childNode(withName: "hintLayer") {
-                hintLayer.zPosition = 3
-                hintLayer.run(SKAction.fadeIn(withDuration: 2))
             }
             sled.isHidden = true
             SKTAudio.sharedInstance().playSoundEffect(soundName)

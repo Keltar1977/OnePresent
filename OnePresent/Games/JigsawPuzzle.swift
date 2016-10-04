@@ -31,15 +31,24 @@ class JigsawPuzzle: SKScene {
         background.position = view.center
         background.zPosition = 0
         addChild(background)
+        let puzzleHint = SKSpriteNode(imageNamed: "puzzleHint")
+        puzzleHint.size = view.frame.size
+        puzzleHint.position = view.center
+        puzzleHint.zPosition = 1
+        addChild(puzzleHint)
         let present = SKSpriteNode(texture: SKTexture(imageNamed:"DayFourPresentImage"), size: view.frame.size)
         present.position = view.center
         present.zPosition = 4
         addChild(present)
+        
         present.run(SKAction.fadeOut(withDuration: 3)) {
             present.zPosition = -2
-            self.imageSize = CGSize(width: 400, height: 400)
-            self.setBorder()
-            self.startNewPuzzleGameLevel()
+            SKTAudio.sharedInstance().playNarration("puzzle narration")
+            puzzleHint.run(SKAction.fadeOut(withDuration: 2)) {
+                self.imageSize = CGSize(width: 400, height: 400)
+                self.setBorder()
+                self.startNewPuzzleGameLevel()
+            }
         }
         startOverButton.position = CGPoint(x: view.center.x - view.frame.size.width/2.8, y: view.center.y)
         startOverButton.zPosition = 3
@@ -133,10 +142,12 @@ class JigsawPuzzle: SKScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let puzzleBorder = border {
-            for touch in touches {
+            if let touch = touches.first {
                 let loc = touch.location( in: puzzleBorder)
                 let location = touch.location( in: self)
                 if startOverButton.contains(location) {
+                    self.border?.removeFromParent()
+                    self.setBorder()
                     self.startNewPuzzleGameLevel()
                     return
                 }
@@ -167,7 +178,7 @@ class JigsawPuzzle: SKScene {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
+        if let touch = touches.first {
             if let puzzleBorder = border {
                 let loc = touch.location(in: puzzleBorder)
                 movingPiece?.touchMoves(point: loc)
@@ -312,10 +323,10 @@ class Piece: SKSpriteNode {
         
     }
     func touchStart(){
-        counterTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(Piece.addMiliSec), userInfo: nil, repeats: true)
+        counterTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(Piece.addMiliSec), userInfo: nil, repeats: false)
     }
     func touchMoves(point : CGPoint){
-        if tapTimeInterval > 1 {
+        if tapTimeInterval == 1 {
             isMoving = true
             let action = SKAction.move(to: point, duration: 0)
             run(action)
@@ -323,9 +334,9 @@ class Piece: SKSpriteNode {
     }
     func touchEnd(){
         
-        counterTimer?.invalidate()
+        counterTimer!.invalidate()
         counterTimer = nil
-        if tapTimeInterval <= 1{
+        if tapTimeInterval == 0 {
             
             let action = SKAction.rotate(byAngle: 90.degreesToRadians, duration: 0.2)
             run(action)

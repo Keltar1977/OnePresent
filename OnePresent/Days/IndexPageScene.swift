@@ -11,6 +11,7 @@ import SpriteKit
 
 class IndexPageScene: SKScene {
 
+    var isLaunch = false
     
     override func didMove(to view: SKView) {
         SKTAudio.sharedInstance().playSoundEffect("Fairy Bling")
@@ -18,7 +19,13 @@ class IndexPageScene: SKScene {
             SKTAudio.sharedInstance().playBackgroundMusic("Title Page Song")
         }
         let userdefaults = UserDefaults.standard
-        
+        if  let hint = childNode(withName: "indexPageHint"), isLaunch {
+            hint.zPosition = 3
+            run(SKAction.afterDelay(0.5, runBlock: { 
+                SKTAudio.sharedInstance().playNarration("indexPageNarration")
+            }))
+            hint.run(SKAction.fadeOut(withDuration: 4.0))
+        }
         for  day in BookDays.allValues {
             if userdefaults.bool(forKey: day.rawValue + "Number") {
                 if let glowLayer = childNode(withName: day.rawValue + "Glow") {
@@ -35,7 +42,6 @@ class IndexPageScene: SKScene {
             let location = touch.location(in: self)
             for present in nodes(at: location) {
                 if let name = present.name, let day = BookDays(rawValue:name) {
-                    SKTAudio.sharedInstance().pauseBackgroundMusic()
                     let pageNumbers:Int
                     switch day {
                     case .dayOne:
@@ -45,6 +51,7 @@ class IndexPageScene: SKScene {
                     }
                     let userdefaults = UserDefaults.standard
                     if let scene = OnePresentPagesScene(fileNamed: "OnePresentPagesScene"), userdefaults.bool(forKey: day.rawValue + "Number") {
+                        SKTAudio.sharedInstance().pauseBackgroundMusic()
                         let bookChapter = BookChapter(day: day, pageNumbers: pageNumbers)
                         scene.bookChapter = bookChapter
                         SKTAudio.sharedInstance().playSoundEffect("openPresent")

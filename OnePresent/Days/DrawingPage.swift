@@ -32,7 +32,6 @@ class DrawingPage: OnePresentPagesScene {
         pageContent.zPosition = 0
         addChild(pageContent)
         btnLeft = childNode(withName: "leftCane") as! SKSpriteNode
-        btnRight = childNode(withName: "rightCane") as! SKSpriteNode
     }
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
@@ -57,11 +56,7 @@ class DrawingPage: OnePresentPagesScene {
                 screenCapture()
                 return
             }
-            if btnRight.contains(location) {
-                if let nextPage = TitlePage(fileNamed: "TitlePage") {
-                    goToScene(nextPage, transition: .curlUp)
-                }
-            } else if btnLeft.contains(location) {
+            if btnLeft.contains(location) {
                 if (prevPage != nil) {
                     goToScene(prevPage, transition: .curlDown)
                 }

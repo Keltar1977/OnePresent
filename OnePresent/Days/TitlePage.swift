@@ -40,6 +40,7 @@ class TitlePage: SKScene {
             let location = touch.location(in: self)
             if (btnRight != nil), btnRight.contains(location) {
                 if let scene = IndexPageScene(fileNamed:"IndexPageScene") {
+                    scene.isLaunch = isLaunch
                     scene.scaleMode = .fill
                     SKTAudio.sharedInstance().playSoundEffect("pageFlip")
                     let transition = SKTransition.moveIn(with: .right, duration: 1)
