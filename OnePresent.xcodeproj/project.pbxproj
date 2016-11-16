@@ -45,6 +45,11 @@
 		9C46C2CB1D9166FB00DB0519 /* DownloadPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */; };
 		9C46C2CD1D92E01C00DB0519 /* DayFourHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C46C2CC1D92E01C00DB0519 /* DayFourHiddenPictures.sks */; };
 		9C483B381D7819BF00A53426 /* DrawingPage.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C483B371D7819BF00A53426 /* DrawingPage.sks */; };
+		9C484C541DABC7EC00383C3A /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = 9C484C501DABC7EC00383C3A /* Appfile */; };
+		9C484C551DABC7EC00383C3A /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = 9C484C511DABC7EC00383C3A /* Fastfile */; };
+		9C484C561DABC7EC00383C3A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9C484C521DABC7EC00383C3A /* README.md */; };
+		9C484C571DABC7EC00383C3A /* report.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9C484C531DABC7EC00383C3A /* report.xml */; };
+		9C484C591DABCCF600383C3A /* Snapfile in Resources */ = {isa = PBXBuildFile; fileRef = 9C484C581DABCCF600383C3A /* Snapfile */; };
 		9C561D611D6F445A0080E909 /* DayFiveComeBack.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */; };
 		9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */; };
 		9C561D651D6F445A0080E909 /* DayFiveHiddenPictures.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */; };
@@ -126,6 +131,11 @@
 		9C46C2CA1D9166FB00DB0519 /* DownloadPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DownloadPage.sks; sourceTree = "<group>"; };
 		9C46C2CC1D92E01C00DB0519 /* DayFourHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFourHiddenPictures.sks; sourceTree = "<group>"; };
 		9C483B371D7819BF00A53426 /* DrawingPage.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = DrawingPage.sks; path = Days/DrawingPage.sks; sourceTree = "<group>"; };
+		9C484C501DABC7EC00383C3A /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9C484C511DABC7EC00383C3A /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9C484C521DABC7EC00383C3A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9C484C531DABC7EC00383C3A /* report.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		9C484C581DABCCF600383C3A /* Snapfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9C561D2A1D6F445A0080E909 /* DayFiveComeBack.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveComeBack.sks; sourceTree = "<group>"; };
 		9C561D2C1D6F445A0080E909 /* DayFiveGetPresent.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveGetPresent.sks; sourceTree = "<group>"; };
 		9C561D2E1D6F445A0080E909 /* DayFiveHiddenPictures.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DayFiveHiddenPictures.sks; sourceTree = "<group>"; };
@@ -229,6 +239,7 @@
 			children = (
 				9C3A64601CE0C79600355C92 /* OnePresent */,
 				9C3A645F1CE0C79600355C92 /* Products */,
+				9C484C4F1DABC7EC00383C3A /* fastlane */,
 				6FAD085E0ADF72CA229A016F /* Pods */,
 				B67B90FE5186CB4199748D99 /* Frameworks */,
 			);
@@ -297,6 +308,18 @@
 				9C03F17A1CEA2F8300CB6C2E /* SimonGame */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		9C484C4F1DABC7EC00383C3A /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				9C484C581DABCCF600383C3A /* Snapfile */,
+				9C484C501DABC7EC00383C3A /* Appfile */,
+				9C484C511DABC7EC00383C3A /* Fastfile */,
+				9C484C521DABC7EC00383C3A /* README.md */,
+				9C484C531DABC7EC00383C3A /* report.xml */,
+			);
+			path = fastlane;
 			sourceTree = "<group>";
 		};
 		9C561D291D6F445A0080E909 /* Day Five */ = {
@@ -450,7 +473,7 @@
 				TargetAttributes = {
 					9C3A645D1CE0C79600355C92 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = HHN74N64DR;
+						DevelopmentTeam = HAJRZU8K28;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -495,6 +518,7 @@
 				9C561D731D6F445A0080E909 /* DayOneHiddenPictures.sks in Resources */,
 				9C561D6A1D6F445A0080E909 /* DayFourGetPresent.sks in Resources */,
 				9CD5864D1D377DB900190278 /* snowfall.sks in Resources */,
+				9C484C541DABC7EC00383C3A /* Appfile in Resources */,
 				9C03F1811CEA2F8300CB6C2E /* Chime purple.mp3 in Resources */,
 				9C561D8F1D6F445A0080E909 /* DayTwoHiddenPictures.sks in Resources */,
 				9C03F17F1CEA2F8300CB6C2E /* Chime yellow.mp3 in Resources */,
@@ -509,6 +533,7 @@
 				9C03F1801CEA2F8300CB6C2E /* Chime green.mp3 in Resources */,
 				9C46C2CD1D92E01C00DB0519 /* DayFourHiddenPictures.sks in Resources */,
 				9C561D8D1D6F445A0080E909 /* DayTwoGetPresent.sks in Resources */,
+				9C484C551DABC7EC00383C3A /* Fastfile in Resources */,
 				9C561D631D6F445A0080E909 /* DayFiveGetPresent.sks in Resources */,
 				9C561D811D6F445A0080E909 /* DaySixHiddenPictures.sks in Resources */,
 				9C6C5A1C1D81AEFF006E3B06 /* OnePresentPagesScene.sks in Resources */,
@@ -516,6 +541,8 @@
 				9C561DA51D6F448C0080E909 /* MazeGameScene.sks in Resources */,
 				9C561D711D6F445A0080E909 /* DayOneGetPresent.sks in Resources */,
 				9C561D6F1D6F445A0080E909 /* DayOneComeBack.sks in Resources */,
+				9C484C571DABC7EC00383C3A /* report.xml in Resources */,
+				9C484C591DABCCF600383C3A /* Snapfile in Resources */,
 				9C561DA21D6F448C0080E909 /* DragAndDropGame.sks in Resources */,
 				9C46C2CB1D9166FB00DB0519 /* DownloadPage.sks in Resources */,
 			);
@@ -536,7 +563,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		34A5A169B82233B211A7E32C /* [CP] Copy Pods Resources */ = {
@@ -595,6 +622,7 @@
 				9C561DA81D6F448C0080E909 /* PlayASongGame.swift in Sources */,
 				9C561DA31D6F448C0080E909 /* DragAndDropGame.swift in Sources */,
 				9C2C38701D5E105D0018BE61 /* OnePresentPagesScene.swift in Sources */,
+				9C484C561DABC7EC00383C3A /* README.md in Sources */,
 				9C3A64971CE0F1B700355C92 /* SKTTimingFunctions.swift in Sources */,
 				9C561DA11D6F448C0080E909 /* CardGame.swift in Sources */,
 				9C3A64911CE0F1B700355C92 /* SKAction+Extensions.swift in Sources */,
@@ -743,10 +771,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = HHN74N64DR;
+				DEVELOPMENT_TEAM = HAJRZU8K28;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = OnePresent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sjinnovation.OnePresent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -765,10 +793,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = HHN74N64DR;
+				DEVELOPMENT_TEAM = HAJRZU8K28;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = OnePresent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sjinnovation.OnePresent;
 				PRODUCT_NAME = "$(TARGET_NAME)";

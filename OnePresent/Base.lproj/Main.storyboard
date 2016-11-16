@@ -1,8 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G19a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--One Present View Controller-->
@@ -13,14 +18,47 @@
                         <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
                         <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
                     </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttZ-bn-wcV" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIF-Wn-oPy">
+                                <rect key="frame" x="20" y="20" width="43.5" height="45.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45.5" id="MXm-rr-LSc"/>
+                                    <constraint firstAttribute="width" constant="43.5" id="P2b-bI-ClL"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="homeButtonImage"/>
+                                <connections>
+                                    <action selector="presentTitle" destination="BV1-FR-VrT" eventType="touchUpInside" id="qNh-jG-zi9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ttZ-bn-wcV" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="7Q1-HG-CmV"/>
+                            <constraint firstItem="ttZ-bn-wcV" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="EDl-q4-gfT"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="ttZ-bn-wcV" secondAttribute="bottom" id="HKq-8w-N0K"/>
+                            <constraint firstAttribute="trailing" secondItem="ttZ-bn-wcV" secondAttribute="trailing" id="HR1-da-vIL"/>
+                            <constraint firstItem="OIF-Wn-oPy" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leadingMargin" id="Pjz-E4-aEB"/>
+                            <constraint firstItem="OIF-Wn-oPy" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" id="gB2-fb-cFO"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="homeButton" destination="OIF-Wn-oPy" id="4tM-GU-Bgb"/>
+                        <outlet property="skView" destination="ttZ-bn-wcV" id="bdj-Mp-dIe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.18140929535232" y="138.40000000000001"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="homeButtonImage" width="81" height="83"/>
+    </resources>
 </document>

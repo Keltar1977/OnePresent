@@ -55,6 +55,8 @@ class SimonGame: SKScene {
                         self.updateSequance()
                     })
                 } else if !hasMatch {
+                    SKTAudio.sharedInstance().playNarration("simonGameError")
+                    updating = true
                     sequance.removeAll()
                     counter = 0
                     lengthOfSequance = 0
@@ -97,7 +99,6 @@ class SimonGame: SKScene {
         }
         generateSequance()
         playSequance()
-        updating = false
         
     }
     
@@ -113,6 +114,7 @@ class SimonGame: SKScene {
             }
         }
         self.run(SKAction.sequence(actionArray)) {
+            self.updating = false
             self.isUserInteractionEnabled = true
         }
         

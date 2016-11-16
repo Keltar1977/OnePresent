@@ -39,9 +39,11 @@ class ComeBackPage: SKScene {
             }
         }
         if let finalPresent = childNode(withName: "finalPresent") {
-            finalPresent.run(SKAction.repeatForever(SKAction.jumpToHeight(20,
-                                                                          duration: 2,
-                                                                          originalPosition: finalPresent.position)))
+            run(SKAction.afterDelay(25.0, runBlock: {
+                finalPresent.run(SKAction.repeatForever(SKAction.jumpToHeight(20,
+                                                                              duration: 1,
+                                                                              originalPosition: finalPresent.position)))
+            }))
         }
         run(SKAction.afterDelay(1, runBlock: {
             SKTAudio.sharedInstance().playNarration(self.day.rawValue + "NarrationComeBack")

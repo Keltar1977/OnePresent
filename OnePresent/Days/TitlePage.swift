@@ -13,13 +13,15 @@ class TitlePage: SKScene {
     var snowfall:SKEmitterNode! = nil
     var btnRight:SKNode! = nil
     var isLaunch = false
-    
+    var vc:OnePresentViewController!
     override func didMove(to view: SKView) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "getController"), object: nil)
         setupPage()
         if isLaunch {
             SKTAudio.sharedInstance().playNarration("titlePageNarration")
         }
         SKTAudio.sharedInstance().playBackgroundMusic("Title Page Song")
+        vc.homeButton.isHidden = true
     }     
     
     func setupPage() {
@@ -52,6 +54,7 @@ class TitlePage: SKScene {
     }
     
     override func willMove(from view: SKView) {
+        vc.homeButton.isHidden = false
         SKTAudio.sharedInstance().pauseNarration()
     }
 

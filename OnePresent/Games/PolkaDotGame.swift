@@ -13,6 +13,7 @@ class PolkaDotGame: SKScene {
 
     var dotArray  = [SKSpriteNode]()
     var counter = 0
+    var round = 0
     var background:SKNode!
 
     override func didMove(to view: SKView) {
@@ -21,11 +22,33 @@ class PolkaDotGame: SKScene {
         }
         if let node = childNode(withName: "DayOnePresentImage") {
             node.run(SKAction.fadeOut(withDuration: 3)) {
+                SKTAudio.sharedInstance().playNarration("polkaDotHint")
                 SKTAudio.sharedInstance().playBackgroundMusic("polkadotBackground")
                 node.zPosition = -2
-                self.createNewDot()
+                self.creatDots()
             }
         }
+    }
+    
+    func creatDots() {
+        for _ in 0...4 {
+            createNewDot()
+        }
+        for dot in dotArray {
+            if dot.name != "completed" {
+                dot.run(SKAction.fadeOut(withDuration: 10))
+            }
+        }
+        self.run(SKAction.afterDelay(10, runBlock: {
+            SKTAudio.sharedInstance().playNarration("polkaDotError")
+            for dot in self.dotArray {
+                if dot.name != "completed" {
+                    dot.name = "failed"
+                    dot.removeFromParent()
+                }
+            }
+            self.clearAllDots()
+        }), withKey: "resetAction")
     }
     
     func createNewDot() {
@@ -73,7 +96,7 @@ class PolkaDotGame: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>?, with event: UIEvent?) {
         super.touchesBegan(touches!, with: event)
-        for touch in touches!  {
+        if let touch = touches?.first  {
             let location = touch.location(in: background)
             for dot in dotArray {
                 if dot.contains(location) {
@@ -82,42 +105,38 @@ class PolkaDotGame: SKScene {
                         dot.name = "checked"
                         SKTAudio.sharedInstance().playSoundEffect("Duck Squeak short")
                         counter += 1
-                        if counter == 15 {
-                            SKTAudio.sharedInstance().playSoundEffect("gameVictory")
-                            if let scene = GetPresentPage(fileNamed:"DayOneGetPresent"),
-                                let explosion = childNode(withName: "explosion") {
-                                scene.day = .dayOne
-                                self.explosionAnimation(explosion: explosion, scene:scene)
+                        if counter == 5 {
+                            round += 1
+                            if round == 3 {
+                                SKTAudio.sharedInstance().playSoundEffect("gameVictory")
+                                if let scene = GetPresentPage(fileNamed:"DayOneGetPresent"),
+                                    let explosion = childNode(withName: "explosion") {
+                                    scene.day = .dayOne
+                                    self.explosionAnimation(explosion: explosion, scene:scene)
+                                }
+                            } else {
+                                self.removeAction(forKey: "resetAction")
+                                for dot in self.dotArray {
+                                    dot.name = "completed"
+                                    dot.run(SKAction.fadeIn(withDuration: 0.5)) {
+                                        dot.removeAllActions()
+                                    }
+                                }
+                                clearAllDots()
+
                             }
                         } else {
-                            if let background = childNode(withName: "background"), counter % 4 == 0 {
-                                background.xScale = -background.xScale
-                            }
-                            createNewDot()
                         }
-                    } else {
-                        clearAllDots()
                     }
-                    return
                 }
             }
-            clearAllDots()
         }
     }
     
     func clearAllDots() {
-        dotArray.removeAll()
-        background.enumerateChildNodes(withName: "checked", using: {node, stop in
-            node.removeFromParent()
-        })
-        background.enumerateChildNodes(withName: "bigDot", using: {node, stop in
-            node.removeFromParent()
-        })
-        background.enumerateChildNodes(withName: "smallDot", using: {node, stop in
-            node.removeFromParent()
-        })
+        dotArray = dotArray.filter() {$0.name != "failed"}
         counter = 0
-        createNewDot()
+        creatDots()
     }
     
     override func willMove(from view: SKView) {
